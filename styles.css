@@ -1,0 +1,16 @@
+* {
+	font-family: "Avenir Next";
+	font-weight: normal;
+}
+
+.display-1 {
+	font-weight: lighter;
+}
+
+.display-2 {
+	font-size: 36px;
+}
+
+.display-3 {
+	font-size: 24px;
+}
