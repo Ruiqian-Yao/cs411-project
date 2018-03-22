@@ -1,0 +1,2 @@
+"Perkins Restaurant & Bakery","American, Bakery","1214 W University Ave, Urbana, IL 61801","40°07'00.0''N","88°13'31.5''W","http://www.perkinsrestaurants.com","http://www.perkinsrestaurants.com/wp-content/uploads/2018/01/PerkinsLogo60.png"
+"LongHorn Steakhouse","American, Grill","2101 N Prospect Ave, Champaign, IL 61822","40°08'29.1''N","88°15'31.0''W","https://www.longhornsteakhouse.com/home","https://media.longhornsteakhouse.com/images/site/ext/pages/pods/longhorn_steakholders_club_benefits_overlay_20141201-2.jpg"
