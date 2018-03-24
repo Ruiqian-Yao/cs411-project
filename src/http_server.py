@@ -17,19 +17,39 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
     # GET
     def do_GET(self):
 
-        self._set_headers()
         params = parse_qs(urlparse(self.path).query)
         print(params)
 
-        # The dish page
+        if ('request_type' not in params):
+            return
+        # send the headers
+        self._set_headers()
+
+        # Get a single dish
         if(params['request_type'][0] == 'find_dish'):
             name = params['name'][0]
             RIN = params['RIN'][0]
             cmd = 'SELECT * FROM Dish WHERE name = %s AND RIN = %s;'
             cur.execute(cmd,[name, RIN])
             data_from_db = cur.fetchall()
-            print(data_from_db)
-            print(type(data_from_db))
+            self.wfile.write(bytes(json.dumps(data_from_db), "utf8"))
+            return
+
+        # Get a single restaurant
+        if(params['request_type'][0] == 'find_restaurant'):
+            RIN = params['RIN'][0]
+            cmd = 'SELECT * FROM Restaurant WHERE RIN = %s;'
+            cur.execute(cmd,RIN)
+            data_from_db = cur.fetchall()
+            self.wfile.write(bytes(json.dumps(data_from_db), "utf8"))
+            return
+
+        # Get a single restaurant
+        if(params['request_type'][0] == 'top_dishes'):
+            RIN = params['RIN'][0]
+            cmd = 'SELECT * FROM Dish WHERE RIN = %s ORDER BY score LIMIT 3;'
+            cur.execute(cmd,RIN)
+            data_from_db = cur.fetchall()
             self.wfile.write(bytes(json.dumps(data_from_db), "utf8"))
             return
 
