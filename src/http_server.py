@@ -1,13 +1,14 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from urllib.parse import urlparse, parse_qs
 import pymysql as mysql
+import json
 from credential import *
 # HTTPRequestHandler class
 class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
 
     # Send header
     def _set_headers(self):
-        self.send_response(200)
+        self.send_response(200, 'OK')
         self.send_header('Access-Control-Allow-Origin', '*')
         self.send_header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
         self.send_header('Content-type','text/json')
@@ -16,11 +17,44 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
     # GET
     def do_GET(self):
 
+        params = parse_qs(urlparse(self.path).query)
+        print(params)
+
+        if ('request_type' not in params):
+            return
+        # send the headers
         self._set_headers()
-        print(parse_qs(urlparse(self.path).query))
+
+        # Get a single dish
+        if(params['request_type'][0] == 'find_dish'):
+            name = params['name'][0]
+            RIN = params['RIN'][0]
+            cmd = 'SELECT * FROM Dish WHERE name = %s AND RIN = %s;'
+            cur.execute(cmd,[name, RIN])
+            data_from_db = cur.fetchall()
+            self.wfile.write(bytes(json.dumps(data_from_db), "utf8"))
+            return
+
+        # Get a single restaurant
+        if(params['request_type'][0] == 'find_restaurant'):
+            RIN = params['RIN'][0]
+            cmd = 'SELECT * FROM Restaurant WHERE RIN = %s;'
+            cur.execute(cmd,RIN)
+            data_from_db = cur.fetchall()
+            self.wfile.write(bytes(json.dumps(data_from_db), "utf8"))
+            return
+
+        # Get a single restaurant
+        if(params['request_type'][0] == 'top_dishes'):
+            RIN = params['RIN'][0]
+            cmd = 'SELECT * FROM Dish WHERE RIN = %s ORDER BY score LIMIT 3;'
+            cur.execute(cmd,RIN)
+            data_from_db = cur.fetchall()
+            self.wfile.write(bytes(json.dumps(data_from_db), "utf8"))
+            return
 
         # Send message back to client
-        message = "Hello world!"
+        message = json.dumps(["hello",{"message": "world"}])
         # Write content as utf-8 data
         self.wfile.write(bytes(message, "utf8"))
         return
@@ -30,14 +64,12 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
 
         self._set_headers()
         # Parse data
-        self._set_headers()
         length = int(self.headers.get('content-length'))
         field_data = self.rfile.read(length)
         fields = parse_qs(field_data)
         print(fields)
-        self.send_response(200)
-        # Send message back to client
-        message = "Hello world!"
+
+        message = json.dumps(["hello",{"message": "world"}])
         # Write content as utf-8 data
         self.wfile.write(bytes(message, "utf8"))
         return
@@ -68,8 +100,6 @@ def connect_to_db():
     return connection
 
 if __name__ == "__main__":
-    # run()
     db = connect_to_db()
-    cur = db.cursor() 
-    cur.execute("SELECT * FROM Dummy")
-    print(cur.fetchall())
+    cur = db.cursor()
+    run()

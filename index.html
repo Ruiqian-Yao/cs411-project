@@ -6,13 +6,93 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" href="styles.css">
 
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+ 
+//helper function that parse the url
+function getJsonFromUrl() {
+  var query = location.search.substr(1);
+  var result = {};
+  query.split("&").forEach(function(part) {
+    var item = part.split("=");
+    result[item[0]] = decodeURIComponent(item[1]);
+  });
+  return result;
+}
+    
+$(document).ready(function(){
+    params = getJsonFromUrl();
+    
+    // Get the dish info
+    $.get("http://192.17.90.133:8081",{request_type:'find_dish', name:params['name'], RIN:params['RIN']}, function(data){
+        dish = data[0]
+        
+        $("#dish_name").text(dish['name']);
+        $("#dish_category").text(dish['category']);
+        if (dish['price'] != 0){
+            $("#price").text(dish['price']);
+        }
+        if (dish['calorie'] != 0){
+            $("#calorie").text(dish['calorie']);
+        }
+        if (dish['description'] != ""){
+            $("#description").text(dish['description']);
+        }else{
+            $("#description_tag").hide();
+        }
+        if (dish['ingredient'] != ""){
+            $("#ingredient").text(dish['ingredient']);
+        }else{
+            $("#ingredient_tag").hide();
+        }
+        $("#image").attr("src", dish['img']);
+    });
+    
+    // Get the restaurant info
+    $.get("http://192.17.90.133:8081",{request_type:'find_restaurant', RIN:params['RIN']}, function(data){
+        restaurant = data[0]
+        console.log(restaurant);
+        $("#restaurant_name").text(restaurant['name']);
+        $("#address").text(restaurant['address']);
+        $("#website").attr("href", restaurant['website']);
+        $("#website").text(restaurant['website']);
+    });
+    
+    // Get top dishes of this restaurant
+    $.get("http://192.17.90.133:8081",{request_type:'top_dishes', RIN:params['RIN']}, function(data){
+        console.log(data);
+        
+        for(var i=0; i<3; i++){
+            var dish = data[i];
+            var dish_name = dish['name'];
+            var dish_image = dish['img'];
+            var dish_url_format = encodeURI(dish_name);
+            var file_url = window.location.href.split('?')[0];
+            
+            $("#top_dishes").append('<div class="col-12 col-sm-4">\
+						<figure class="figure">\
+                        <a href ="' + file_url+'?name='+dish_url_format+'&RIN='+params['RIN']+'">'+
+							'<img src="' + dish_image +'"' +
+                            'class="figure-img img-fluid rounded" alt="Image">\
+                            </a>\
+							<figcaption class="figure-caption">' + dish_name +
+                            '</figcaption>\
+						</figure>\
+					</div>');
+        }
+    });
+});
+</script>
+</head>
+    
 <body>
 	<div class="container">
 		<div class="row">
 			<div class="col-12 col-sm-7">
 				<div class="jumbotron">
-					<h1 class="display-1">Beef SSAM</h1>
-					<img src="http://miga-restaurant.com/wp-content/uploads/2015/10/Beef_SSAM-065-1-e1466967886962.jpg" class="img-fluid" alt="Responsive image">
+					<h1 class="display-1" id = "dish_name">Dish Name</h1>
+					<img id="image" src="" class="img-fluid" alt="Responsive image">
 				</div>
 			</div>
 			<div class="col-12 col-sm-5">
@@ -45,7 +125,7 @@
 							<p>Category</p>
 						</div>
 						<div class="col-8">
-							<p>Appetizer</p>
+							<p id="dish_category">a category</p>
 						</div>
 					</div>
 					<div class="row">
@@ -53,7 +133,7 @@
 							<p>Price</p>
 						</div>
 						<div class="col-8">
-							<p>17</p>
+							<p id="price">(No data)</p>
 						</div>
 					</div>
 					<div class="row">
@@ -61,21 +141,29 @@
 							<p>Calorie</p>
 						</div>
 						<div class="col-8">
-							<p>(No data)</p>
+							<p id="calorie">(No data)</p>
 						</div>
 					</div>
-					<div class="row">
+                    <div class="row" id="description_tag">
+						<div class="col-4">
+							<p>Description</p>
+						</div>
+						<div class="col-8">
+							<p id="description">A simple description</p>
+						</div>
+					</div>
+					<div class="row" id="ingredient_tag">
 						<div class="col-4">
 							<p>Ingredient</p>
 						</div>
 						<div class="col-8">
-							<p>kimchi, pickles, lettuce, rice</p>
+							<p id="ingredient">Some ingredient</p>
 						</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-12">
-						<h2 class="display-2">Miga Restaurant</h2>
+						<h2 class="display-2" id="restaurant_name">Miga Restaurant</h2>
 					</div>
 				</div>
 				<div class="row">
@@ -86,7 +174,7 @@
 									<p>Address</p>
 								</div>
 								<div class="col-9">
-									<p>301 N Neil St #104, Champaign, Il 61820</p>
+									<p id="address">301 N Neil St #104, Champaign, Il 61820</p>
 								</div>
 							</div>
 							<div class="row">
@@ -94,7 +182,7 @@
 									<p>Website</p>
 								</div>
 								<div class="col-9">
-									<a href="http://miga-restaurant.com/" , target="_blank">http://miga-restaurant.com/</a>
+									<a id="website" href="http://miga-restaurant.com/" , target="_blank">http://miga-restaurant.com/</a>
 								</div>
 							</div>
 						</div>
@@ -108,25 +196,7 @@
 					<p>Top Choices</p>
 				</div>
 				</div>
-				<div class="row">
-					<div class="col-12 col-sm-4">
-						<figure class="figure">
-							<img src="http://miga-restaurant.com/wp-content/uploads/2015/10/Beef_SSAM-065-1-e1466967886962.jpg" class="figure-img img-fluid rounded" alt="Beef SSAM">
-							<figcaption class="figure-caption">Beef SSAM</figcaption>
-						</figure>
-					</div>
-					<div class="col-12 col-sm-4">
-						<figure class="figure">
-							<img src="http://miga-restaurant.com/wp-content/uploads/2015/10/cevicheMini-2.jpg" class="figure-img img-fluid rounded" alt="Ceviche">
-							<figcaption class="figure-caption">Ceviche</figcaption>
-						</figure>
-					</div>
-					<div class="col-12 col-sm-4">
-						<figure class="figure">
-							<img src="https://s3-media2.fl.yelpcdn.com/bphoto/20mYV7EXYhBIUw8-pdA_lg/o.jpg" class="figure-img img-fluid rounded" alt="Bi Bim Bap">
-							<figcaption class="figure-caption">Bi Bim Bap</figcaption>
-						</figure>
-					</div>
+				<div class="row" id="top_dishes">
 				</div>
 			</div>
 		</div>
