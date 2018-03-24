@@ -24,11 +24,14 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
         # The dish page
         if(params['request_type'][0] == 'find_dish'):
             name = params['name'][0]
-            RIN = int(params['RIN'][0])
-            cmd = 'SELECT * FROM Dish WHERE name = %s AND RIN = %d;'
+            RIN = params['RIN'][0]
+            cmd = 'SELECT * FROM Dish WHERE name = %s AND RIN = %s;'
             cur.execute(cmd,[name, RIN])
             data_from_db = cur.fetchall()
             print(data_from_db)
+            print(type(data_from_db))
+            self.wfile.write(bytes(json.dumps(data_from_db), "utf8"))
+            return
 
         # Send message back to client
         message = json.dumps(["hello",{"message": "world"}])
