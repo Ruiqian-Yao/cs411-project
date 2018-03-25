@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="styles.css">
-
+ 
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
@@ -84,6 +84,26 @@ $(document).ready(function(){
 					</div>');
         }
     });
+    
+    // Comment post
+    $("#post").click(function(){
+        var comment = $("#comment_input").val();
+        if (comment == ""){
+            return;
+        }
+        var dish = params['name'];
+        var RIN = params['RIN'];
+         $.post("http://192.17.90.133:8081",{request_type:'comment_upload', content:comment, dish:dish, RIN:RIN}, function(data){
+             alert('Thank you for your comment!');
+             console.log(data);
+         });
+    });
+    
+    $("#delete").click(function(){
+        $.get("http://192.17.90.133:8081",{request_type:'delete', name: params['name'], RIN:params['RIN']}, function(data){
+            alert('Entry deleted from database!');    
+        });
+    });
 });
 </script>
 </head>
@@ -99,13 +119,16 @@ $(document).ready(function(){
 						<p id ="dish_score"></p>
 						<i class="material-icons">favorite_border</i>
 					</div>
+                    <button type="button" class="btn btn-outline-primary" id = "delete">Delete this dish</button>
 					<form>
 						<div>
 							<label>Write Your Comments</label>
-							<textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+							<textarea class="form-control" rows="3" id = "comment_input"></textarea>
 						</div>
 					</form>
-					<div class="d-flex justify-content-end"><button type="button" class="btn btn-outline-primary">post</button></div>
+					<div class="d-flex justify-content-end"><button type="button" class="btn btn-outline-primary" id = "post">post</button></div>
+ 
+                    
 				</div>
 			</div>
 			<div class="col-12 col-sm-5">
