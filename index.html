@@ -27,7 +27,7 @@ $(document).ready(function(){
     // Get the dish info
     $.get("http://192.17.90.133:8081",{request_type:'find_dish', name:params['name'], RIN:params['RIN']}, function(data){
         dish = data[0]
-        
+        console.log(dish);
         $("#dish_name").text(dish['name']);
         $("#dish_category").text(dish['category']);
         if (dish['price'] != 0){
@@ -67,7 +67,7 @@ $(document).ready(function(){
             var dish = data[i];
             var dish_name = dish['name'];
             var dish_image = dish['img'];
-            var dish_url_format = encodeURI(dish_name);
+            var dish_url_format = encodeURIComponent(dish_name);
             var file_url = window.location.href.split('?')[0];
             
             $("#top_dishes").append('<div class="col-12 col-sm-4">\
