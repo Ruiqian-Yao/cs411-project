@@ -31,21 +31,19 @@ function load(data){
             
         var new_entry= '<div class="col-12 col-sm-4">\
                         <div class="card" style="width: 18rem; margin:10px;">\
-                            <img class="card-img-top" src="' + img + '"'+
-                            'alt="">\
+                            <a href="'+href_link+'"><img class="card-img-top" src="' + img + '"'+
+                            'alt=""></a>\
                             <div class="card-body">\
-                                <div class="row">\
-                                    <h5 class="card-title col-6">'+d_name+'</h5>\
-                                    <div class="col-6 d-flex">\
-                                        <p>'+score+'</p>\
-                                        <i class="material-icons">favorite</i>\
-                                </div>\
+                                <h5 class="card-title">'+d_name+'</h5>\
+                                <div class="d-inline-flex">\
+                                    <p>'+score+'</p>\
+                                    <i class="material-icons">favorite</i>\
                                 </div>\
                                 <div class="row">\
                                     <p class="col-12 col-sm-6">Restaurant:</p>\
                                     <p class="col-12 col-sm-6">'+r_name+'</p>\
                                 </div>\
-                                <a href="'+href_link+'" class="btn btn-primary">View Dish</a>\
+                                <a href="" class="btn btn-primary">Delete</a>\
                             </div>\
                         </div>\
                         </div>';
