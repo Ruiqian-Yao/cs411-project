@@ -4,6 +4,7 @@
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="styles.css">
 
 <head>
@@ -28,8 +29,9 @@ $(document).ready(function(){
     $.get("http://192.17.90.133:8081",{request_type:'find_dish', name:params['name'], RIN:params['RIN']}, function(data){
         dish = data[0]
         console.log(dish);
-        $("#dish_name").text(dish['name']);
-        $("#dish_category").text(dish['category']);
+		$("#dish_name").text(dish['name']);
+		$("#dish_category").text(dish['category']);
+		$("#dish_score").text(dish['score']);
         if (dish['price'] != 0){
             $("#price").text(dish['price']);
         }
@@ -93,6 +95,17 @@ $(document).ready(function(){
 				<div class="jumbotron">
 					<h1 class="display-1" id = "dish_name">Dish Name</h1>
 					<img id="image" src="" class="img-fluid" alt="Responsive image">
+					<div class="d-flex justify-content-end">
+						<p id ="dish_score"></p>
+						<i class="material-icons">favorite_border</i>
+					</div>
+					<form>
+						<div>
+							<label>Write Your Comments</label>
+							<textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+						</div>
+					</form>
+					<div class="d-flex justify-content-end"><button type="button" class="btn btn-outline-primary">post</button></div>
 				</div>
 			</div>
 			<div class="col-12 col-sm-5">
@@ -161,6 +174,7 @@ $(document).ready(function(){
 						</div>
 					</div>
 				</div>
+				<hr />
 				<div class="row">
 					<div class="col-12">
 						<h2 class="display-2" id="restaurant_name">Miga Restaurant</h2>
