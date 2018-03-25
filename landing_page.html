@@ -9,15 +9,49 @@
 
 
 <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script>
-        $(document).ready(function(){
-            $('.dropdown-toggle').dropdown()
-        });
-    </script>   
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script>
+$(document).ready(function(){
+    // Get top 50 dishes
+    $.get("http://192.17.90.133:8081",{request_type:"top_50"},function(data){
+        console.log(data);
+        var top_50_dishes = $("#top_50_dishes");
+        for(var i=0;i<data.length;i++){
+            var d_name = data[i]['name'];
+            var d_name_url = encodeURIComponent(d_name);
+            var img = data[i]['img'];
+            var score = data[i]['score'];
+            var r_name = data[i]['r.name'];
+            var RIN = data[i]['RIN'];
+            var href_link = window.location.href.replace('landing_page.html','index.html').replace('#','')+'?name='+d_name_url+'&RIN='+RIN;
+            console.log(href_link);
+            
+            var new_entry= '<div class="col-12 col-sm-4">\
+                                <div class="card" style="width: 18rem; margin:10px;">\
+                                    <a href="'+href_link+'"><img class="card-img-top" src="' + img + '"'+
+                                    'alt=""></a>\
+                                    <div class="card-body">\
+                                    <h5>'+d_name+'</h5>\
+                                    <div class="d-inline-flex">\
+                                        <p>'+score+'</p>\
+                                        <i class="material-icons">favorite</i>\
+                                    </div>\
+                                    <div class="row">\
+                                        <p class="col-12 col-sm-6">Restaurant:</p>\
+                                        <p class="col-12 col-sm-6">'+r_name+'</p>\
+                                    </div>\
+                                    </div>\
+                                </div>\
+                            </div>';
+            top_50_dishes.append(new_entry);
+        }
+    });
+    // User profile dropdown
+    $('.dropdown-toggle').dropdown()
+    });
+</script>   
 </head>
 
 
@@ -63,7 +97,7 @@
                         <a><img src="if_grapes_2003194.png" class="img-fluid rounded" alt="Sumerinlan" style="width: 50%"></a>
                     </li> -->
                 </ul>
-            <div>
+            </div>
         </nav>
         
         <div class="container-fluid">
@@ -90,80 +124,7 @@
 
 
                 <div class="col-12 col-sm-9">
-                    <div class="row">
-                        <div class="col-12 col-sm-4">
-                            <div class="card" style="width: 18rem;">
-                                <img class="card-img-top" src="http://miga-restaurant.com/wp-content/uploads/2015/10/Beef_SSAM-065-1-e1466967886962.jpg"  alt="Beef SSAM">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <h5 class="card-title col-6">Beef SSAM</h5>
-                                        <div class="col-6 d-flex">
-                                            <p>21 Likes</p>  
-                                            <i class="material-icons">favorite</i>                                      
-                                        </div>
-                                    </div>                                    
-                                    <div class="row">
-                                        <p class="col-12 col-sm-6">Restaurant:</p>
-                                        <p class="col-12 col-sm-6">Miga</p>
-                                    </div>
-
-                                    <!-- <div class="row">
-                                            <p class="col-12 col-sm-6">Restaurant:</p>
-                                            <p class="col-12 col-sm-6">Miga</p>
-                                    </div>
-                                    <div class="row">
-                                            <p class="col-12 col-sm-6">Calories:</p>
-                                            <p class="col-12 col-sm-6">None</p>
-                                    </div>
-                                    <div class="row">
-                                            <p class="col-12 col-sm-6">Price:</p>
-                                            <p class="col-12 col-sm-6">$17</p>
-                                    </div>
-                                    <div class="row"><p class="col-12 col-sm-12">Ingredient: kimchi, pickles, lettuce, rice</p></div> -->
-                                    <a href="#" class="btn btn-primary d-flex justify-content-center">View Dish</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-12 col-sm-4">
-                            <div class="card" style="width: 18rem;">
-                                <img class="card-img-top" src="http://miga-restaurant.com/wp-content/uploads/2015/10/cevicheMini-2.jpg"  alt="Ceviche">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <h5 class="card-title col-6">Ceviche</h5>
-                                        <div class="col-6 d-flex">
-                                            <p>33 Likes</p>  
-                                            <i class="material-icons">favorite</i>                                      
-                                        </div>
-                                    </div>                                    
-                                    <div class="row">
-                                        <p class="col-12 col-sm-6">Restaurant:</p>
-                                        <p class="col-12 col-sm-6">Miga</p>
-                                    </div>
-                                    <a href="#" class="btn btn-primary">View Dish</a>
-                                </div>
-                            </div>                           
-                        </div>
-
-                        <div class="col-12 col-sm-4">
-                            <div class="card" style="width: 18rem;">
-                                <img class="card-img-top" src="https://s3-media2.fl.yelpcdn.com/bphoto/20mYV7EXYhBIUw8-pdA_lg/o.jpg"  alt="Bi Bim Bap">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <h5 class="card-title col-6">Bi Bim Bap</h5>
-                                        <div class="col-6 d-flex">
-                                            <p>33 Likes</p>  
-                                            <i class="material-icons">favorite</i>                                      
-                                        </div>
-                                    </div>                                    
-                                    <div class="row">
-                                        <p class="col-12 col-sm-6">Restaurant:</p>
-                                        <p class="col-12 col-sm-6">Miga</p>
-                                    </div>
-                                    <a href="#" class="btn btn-primary">View Dish</a>
-                                </div>
-                            </div>     
-                        </div>
+                    <div class="row" id = "top_50_dishes">
                     </div>                      
                 </div>
                 
