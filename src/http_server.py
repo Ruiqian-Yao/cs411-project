@@ -33,6 +33,10 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
             cur.execute(cmd,[name, RIN])
             data_from_db = cur.fetchall()
             self.wfile.write(bytes(json.dumps(data_from_db), "utf8"))
+            # Increment the score by one of this dish
+            cmd = 'UPDATE Dish SET score = score + 1 WHERE name = %s AND RIN = %s;'
+            cur.execute(cmd, [name, RIN])
+            db.commit()
             return
 
         # Get a single restaurant
@@ -55,7 +59,7 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
 
         # Get top 50 dishes
         if(params['request_type'][0] == 'top_50'):
-            cmd = 'SELECT d.name, d.img, d.score, r.name, r.RIN FROM Dish d, Restaurant r WHERE d.RIN = r.RIN ORDER BY d.score LIMIT 50;'
+            cmd = 'SELECT d.name, d.img, d.score, r.name, r.RIN FROM Dish d, Restaurant r WHERE d.RIN = r.RIN ORDER BY d.score desc LIMIT 50;'
             cur.execute(cmd)
             data_from_db = cur.fetchall()
             self.wfile.write(bytes(json.dumps(data_from_db),"utf8"))
