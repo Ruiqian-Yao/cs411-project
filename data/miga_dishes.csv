@@ -1,4 +1,4 @@
 DIN,name,description,ingredient,category,calorie,price,img,score,RIN,Restaurant,
-,Beef SSAM,,"kimchi, pickles, lettuce, rice",appetizer,,17,http://miga-restaurant.com/wp-content/uploads/2015/10/Beef_SSAM-065-1-e1466967886962.jpg,0,,Miga
-,Ceviche,,"salmon, white fish, tuna, red onion, mango, seaweed mix, yuzu konbu, vinaigrette",appetizer,,12,http://miga-restaurant.com/wp-content/uploads/2015/10/cevicheMini-2.jpg,0,,Miga
-,Bi Bim Bap,,"rice with seasonal vegetables, fried egg, chili sauce, add beef $6, add raw or seared salmon $6 or tofu $4",dinner,,15,https://s3-media2.fl.yelpcdn.com/bphoto/20mYV7EXYhBIUw8-pdA_lg/o.jpg,0,,Miga
+,Beef SSAM,,"kimchi, pickles, lettuce, rice",dinner / appetizer,,17,http://miga-restaurant.com/wp-content/uploads/2015/10/Beef_SSAM-065-1-e1466967886962.jpg,0,,Miga
+,Ceviche,,"salmon, white fish, tuna, red onion, mango, seaweed mix, yuzu konbu, vinaigrette",dinner / appetizer,,12,http://miga-restaurant.com/wp-content/uploads/2015/10/cevicheMini-2.jpg,0,,Miga
+,Bi Bim Bap,,"rice with seasonal vegetables, fried egg, chili sauce, add beef $6, add raw or seared salmon $6 or tofu $4",dinner / entree,,15,https://s3-media2.fl.yelpcdn.com/bphoto/20mYV7EXYhBIUw8-pdA_lg/o.jpg,0,,Miga
