@@ -13,7 +13,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script>
-    
+
 function load(data){
     // delete the existing dish entries
     var top_50_dishes = $("#top_50_dishes");
@@ -28,7 +28,7 @@ function load(data){
         var RIN = data[i]['RIN'];
         var href_link = '/dish_detail.html?name='+d_name_url+'&RIN='+RIN;
         console.log(href_link);
-            
+
         var new_entry= '<div class="col-12 col-sm-4">\
                         <div class="card" style="width: 18rem; margin:10px;">\
                             <a href="'+href_link+'"><img class="card-img-top" src="' + img + '"'+
@@ -49,15 +49,15 @@ function load(data){
         top_50_dishes.append(new_entry);
     }
 }
-    
+
 $(document).ready(function(){
-    
+
     // Get top 50 dishes
     $.get("http://192.17.90.133:8081",{request_type:"top_50"},function(data){
         console.log(data);
         load(data);
     });
-    
+
     // Search button click event
     $("#search_button").click(function() {
         var search_text = $("#search_input").val();
@@ -68,12 +68,12 @@ $(document).ready(function(){
             load(data);
         });
     });
-    
+
     $('.dropdown-toggle').dropdown();
-    
+
     });
 
-</script>   
+</script>
 </head>
 
 
@@ -81,31 +81,31 @@ $(document).ready(function(){
     <div class="containter">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="col-12 col-sm-7">
-                <div class="d-flex align-items-end">
+                <div class="d-flex align-items-end>
                     <!-- <form class=""> -->
                             <div class="form-group col-md-9">
-                            <input class="form-control" type="search" placeholder="Search" aria-label="Search" id="search_input">  
+                            <input class="form-control" type="search" placeholder="Search" aria-label="Search" id="search_input">
                             </div>
                             <div class="form-group col-md-3">
                                 <button class="btn btn-outline-success" type="submit" id="search_button">Search</button>
-                            </div>                          
+                            </div>
                     <!-- </form>  -->
-                </div>               
+                </div>
             </div>
 
             <div class="col-12 col-sm-5">
                 <ul class="nav d-flex flex-row-reverse">
                     <li class="nav-item col-3 dropdown dropdown-menu-right">
                             <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img src="if_grapes_2003194.png" class="img-fluid rounded" alt="Sumerinlan" style="width: 50%">
+                                <img src="if_grapes_2003194.png" class="figure-img img-fluid rounded" alt="Sumerinlan" style="width: 50%">
                             </a>
-                          
+
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
                               <a class="dropdown-item" href="#">History</a>
                               <a class="dropdown-item" href="#">User Account</a>
                               <a class="dropdown-item" href="#">Log out</a>
                             </div>
-                    </li>                    
+                    </li>
                     <li class="nav-item col-3">
                         <a class="nav-link" href="#">Home</a>
                     </li>
@@ -121,7 +121,7 @@ $(document).ready(function(){
                 </ul>
             </div>
         </nav>
-        
+
         <div class="container-fluid">
             <div class="row" style="padding-top: 20px">
                 <div class="col-12 col-sm-3">
@@ -141,15 +141,15 @@ $(document).ready(function(){
                                     <label>Steak</label>
                             </li>
                         </ul>
-                    </div>                                  
+                    </div>
                 </div>
 
 
                 <div class="col-12 col-sm-9">
                     <div class="row" id = "top_50_dishes">
-                    </div>                      
+                    </div>
                 </div>
-                
+
             </div>
         </div>
 

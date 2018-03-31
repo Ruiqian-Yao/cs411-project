@@ -9,9 +9,11 @@
 
 <head>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 	<script>
-        var latitude = 51.508742;
-        var longitude = -0.120850;
+		var latitude = 51.508742;
+		var longitude = -0.120850;
 
 		//helper function that parse the url
 		function getJsonFromUrl() {
@@ -67,31 +69,34 @@
 				$("#restaurant_name").text(restaurant['name']);
 				$("#address").text(restaurant['address']);
 				$("#website").attr("href", restaurant['website']);
-                $("#website").text(restaurant['website']);
-                latitude = restaurant['latitude'];
-                longitude = restaurant['longitude'];
-                console.log(latitude);
-                console.log(longitude);
-                
-                var destination = { lat: latitude, lng: longitude };
-                var map = new google.maps.Map(document.getElementById('googleMap'), {
-                  zoom: 13,
-                  center: destination
-                });
+				$("#website").text(restaurant['website']);
+				latitude = restaurant['latitude'];
+				longitude = restaurant['longitude'];
+				console.log(latitude);
+				console.log(longitude);
 
-                // Add a marker at the center of the map.
-                var marker = new google.maps.Marker({
-                  position: destination,
-                  label: restaurant['name'],
-                  map: map
-                });
+				var destination = {
+					lat: latitude,
+					lng: longitude
+				};
+				var map = new google.maps.Map(document.getElementById('googleMap'), {
+					zoom: 13,
+					center: destination
+				});
 
-//                var mapProp= {
-//                // center: new google.maps.LatLng(51.508742,-0.120850),
-//                center: new google.maps.LatLng(latitude,longitude),
-//                zoom:20,
-//            };
-                //var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+				// Add a marker at the center of the map.
+				var marker = new google.maps.Marker({
+					position: destination,
+					label: restaurant['name'],
+					map: map
+				});
+
+				//                var mapProp= {
+				//                // center: new google.maps.LatLng(51.508742,-0.120850),
+				//                center: new google.maps.LatLng(latitude,longitude),
+				//                zoom:20,
+				//            };
+				//var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
 			});
 
 			// Get top dishes of this restaurant
@@ -149,57 +154,73 @@
 				});
 			});
 		});
+
+		// like button
+		$(function() {
+			$('.btn-like')
+				.bind('click', function(event) {
+					$(".btn-like").toggleClass("liked");
+				})
+		});
 	</script>
 </head>
 
 <body>
-	<div class="container">
+	<!-- nav bar, absolute position -->
+	<nav class="navbar navbar-expand-lg" style="width:120px;height:60px;position:absolute;right:0px;top:0px">
+		<div class="dropdown">
+			<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				<img src="if_grapes_2003194.png" class="img-fluid rounded" style="width:40px;height:40px">
+  			</button>
+			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+				<a class="dropdown-header">Sumerinlan</a>
+				<a class="dropdown-item" href="#">Home</a>
+				<a class="dropdown-item" href="#">History</a>
+				<a class="dropdown-item" href="#">Log out</a>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container" style="height:100vh">
 		<div class="row">
 			<div class="col-12 col-sm-6">
-				<div class="jumbotron">
+				<div class="jumbotron bg-light" style="height:100%;margin:0px;">
 					<h1 class="display-1" id="dish_name">Dish Name</h1>
 					<img id="image" src="" class="img-fluid" alt="Responsive image">
 					<div class="d-flex justify-content-end">
-						<p id="dish_score"></p>
-						<i class="material-icons">favorite_border</i>
-					</div>
-					<button type="button" class="btn btn-outline-primary" id="delete">Delete this dish</button>
-					<form>
-						<div>
-							<label>Write Your Comments</label>
-							<textarea class="form-control" rows="3" id="comment_input"></textarea>
+						<div style="padding:10px;">
+							<button type="button" class="btn btn-like" style="padding: 2px 5px;">
+								<i class="material-icons">favorite_border</i> <span id="dish_score"></span>
+							</button>
 						</div>
-					</form>
-					<div class="d-flex justify-content-end"><button type="button" class="btn btn-outline-primary" id="post">post</button></div>
-
-
+						<div style="padding:10px;">
+							<!-- Submit History -->
+							<button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#submitHistory">Add to History</button>
+							<div class="modal fade" id="submitHistory" role="dialog">
+								<div class="modal-dialog">
+									<!-- Modal content-->
+									<div class="modal-content">
+										<div class="modal-body">
+											<form>
+												<div>
+													<label>Additional Comments</label>
+													<textarea class="form-control" rows="3" id="comment_input"></textarea>
+												</div>
+											</form>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-outline-primary" id="post">Post</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- <button type="button" class="btn btn-outline-primary" id="delete">Delete this dish</button> -->
 				</div>
 			</div>
-			<div class="col-12 col-sm-6">
-				<div class="container" style="margin: 20px auto">
-					<div class="row">
-						<div class="col-11">
-							<ul class="nav">
-								<li class="nav-item">
-									<a class="nav-link" href="#">Home</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link" href="#">History</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link" href="#">Log Out</a>
-								</li>
-							</ul>
-						</div>
-						<div class="col-1">
-							<figure class="figure">
-								<img src="if_grapes_2003194.png" class="figure-img img-fluid rounded" alt="Sumerinlan">
-								<figcaption class="figure-caption">Sumerinlan</figcaption>
-							</figure>
-						</div>
-					</div>
-				</div>
-				<div class="container" style="padding:0px">
+			<div class="col-12 col-sm-6" style="padding-top: 60px">
+				<div class="container">
 					<div class="row">
 						<div class="col-3">
 							<p>Category</p>
@@ -243,11 +264,11 @@
 				</div>
 				<hr />
 
-                <div class="row">
-                    <div class="col-12">
-                        <h2 class="display-2" id="restaurant_name">Miga Restaurant</h2>
-                    </div>
-                </div>
+				<div class="row">
+					<div class="col-12">
+						<h2 class="display-2" id="restaurant_name">Miga Restaurant</h2>
+					</div>
+				</div>
 				<div class="row">
 					<div class="col-12 col-sm-8">
 						<div class="container" style="padding:0px">
@@ -267,32 +288,32 @@
 									<a id="website" href="http://miga-restaurant.com/" , target="_blank">http://miga-restaurant.com/</a>
 								</div>
 							</div>
-            				<div class="row">
-            					<div class="col-12">
-            						<p>Top Choices</p>
-            					</div>
-            				</div>
-            				<div class="row" id="top_dishes">
-            				</div>
+							<div class="row">
+								<div class="col-12">
+									<p>Top Choices</p>
+								</div>
+							</div>
+							<div class="row" id="top_dishes">
+							</div>
 						</div>
 					</div>
 					<div id="googleMap" class="col-12 col-sm-4">
-                        <p>Google Map</p>
+						<p>Google Map</p>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
-    <!-- Google map api -->
-    <script>
-        function myMap() {
-            alert(latitude);
-            alert(longitude);
-            //var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
-        }
-    </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAo3DAu0kRrfxphopPonUWwbDnqPP33CU8"></script>
+	<!-- Google map api -->
+	<script>
+		function myMap() {
+			alert(latitude);
+			alert(longitude);
+			//var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+		}
+	</script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAo3DAu0kRrfxphopPonUWwbDnqPP33CU8"></script>
 </body>
 
 </html>
