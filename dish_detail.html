@@ -2,6 +2,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -72,8 +73,8 @@
 				$("#website").text(restaurant['website']);
 				latitude = restaurant['latitude'];
 				longitude = restaurant['longitude'];
-				console.log(latitude);
-				console.log(longitude);
+				// console.log(latitude);
+				// console.log(longitude);
 
 				var destination = {
 					lat: latitude,
@@ -90,13 +91,6 @@
 					label: restaurant['name'],
 					map: map
 				});
-
-				//                var mapProp= {
-				//                // center: new google.maps.LatLng(51.508742,-0.120850),
-				//                center: new google.maps.LatLng(latitude,longitude),
-				//                zoom:20,
-				//            };
-				//var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
 			});
 
 			// Get top dishes of this restaurant
@@ -174,7 +168,7 @@
   			</button>
 			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 				<a class="dropdown-header">Sumerinlan</a>
-				<a class="dropdown-item" href="#">Home</a>
+				<a class="dropdown-item" href="http://upversion.web.engr.illinois.edu/">Home</a>
 				<a class="dropdown-item" href="#">History</a>
 				<a class="dropdown-item" href="#">Log out</a>
 			</div>
@@ -195,16 +189,19 @@
 						</div>
 						<div style="padding:10px;">
 							<!-- Submit History -->
-							<button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#submitHistory">Add to History</button>
-							<div class="modal fade" id="submitHistory" role="dialog">
+							<button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#submitHistoryModal">Add to History</button>
+							<div class="modal fade" id="submitHistoryModal" role="dialog">
 								<div class="modal-dialog">
 									<!-- Modal content-->
 									<div class="modal-content">
+										<div class="modal-header">
+											<h4 class="modal-title">Additional Comments</h4>
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+										</div>
 										<div class="modal-body">
 											<form>
 												<div>
-													<label>Additional Comments</label>
-													<textarea class="form-control" rows="3" id="comment_input"></textarea>
+													<textarea class="form-control" rows="3" id="comment_input" placeholder="(Optional) How was your experience?"></textarea>
 												</div>
 											</form>
 										</div>
@@ -266,7 +263,7 @@
 
 				<div class="row">
 					<div class="col-12">
-						<h2 class="display-2" id="restaurant_name">Miga Restaurant</h2>
+						<h2 class="display-2" id="restaurant_name">Restaurant Name</h2>
 					</div>
 				</div>
 				<div class="row">
@@ -277,7 +274,7 @@
 									<p>Address</p>
 								</div>
 								<div class="col-9">
-									<p id="address">301 N Neil St #104, Champaign, Il 61820</p>
+									<p id="address">Address</p>
 								</div>
 							</div>
 							<div class="row">
@@ -285,7 +282,7 @@
 									<p>Website</p>
 								</div>
 								<div class="col-9">
-									<a id="website" href="http://miga-restaurant.com/" , target="_blank">http://miga-restaurant.com/</a>
+									<a id="website" href="http://upversion.web.engr.illinois.edu/" , target="_blank">http://upversion.web.engr.illinois.edu/</a>
 								</div>
 							</div>
 							<div class="row">
@@ -306,13 +303,6 @@
 	</div>
 
 	<!-- Google map api -->
-	<script>
-		function myMap() {
-			alert(latitude);
-			alert(longitude);
-			//var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
-		}
-	</script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAo3DAu0kRrfxphopPonUWwbDnqPP33CU8"></script>
 </body>
 
