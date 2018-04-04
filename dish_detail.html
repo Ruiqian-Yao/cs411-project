@@ -37,22 +37,22 @@
 				RIN: params['RIN']
 			}, function(data) {
 				dish = data[0]
-				// console.log(dish);
+				//console.log(dish);
 				$("#dish_name").text(dish['name']);
 				$("#dish_category").text(dish['category']);
 				$("#dish_score").text(dish['score']);
-				if (dish['price'] != 0) {
+				if (dish['price'] != null) {
 					$("#price").text(dish['price']);
 				}
-				if (dish['calorie'] != 0) {
+				if (dish['calorie'] != null) {
 					$("#calorie").text(dish['calorie']);
 				}
-				if (dish['description'] != "") {
+				if (dish['description'] != null) {
 					$("#description").text(dish['description']);
 				} else {
 					$("#description_tag").hide();
 				}
-				if (dish['ingredient'] != "") {
+				if (dish['ingredient'] != null) {
 					$("#ingredient").text(dish['ingredient']);
 				} else {
 					$("#ingredient_tag").hide();
