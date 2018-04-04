@@ -29,12 +29,12 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
         if(params['request_type'][0] == 'find_dish'):
             name = params['name'][0]
             RIN = params['RIN'][0]
-            cmd = 'SELECT * FROM Dish_copy WHERE name = %s AND RIN = %s;'
+            cmd = 'SELECT * FROM Dish WHERE name = %s AND RIN = %s;'
             cur.execute(cmd,[name, RIN])
             data_from_db = cur.fetchall()
             self.wfile.write(bytes(json.dumps(data_from_db), "utf8"))
             # Increment the score by one of this dish
-            cmd = 'UPDATE Dish_copy SET score = score + 1 WHERE name = %s AND RIN = %s;'
+            cmd = 'UPDATE Dish SET score = score + 1 WHERE name = %s AND RIN = %s;'
             cur.execute(cmd, [name, RIN])
             db.commit()
             return
@@ -51,7 +51,7 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
         # Get top dishes of this restaurant
         if(params['request_type'][0] == 'top_dishes'):
             RIN = params['RIN'][0]
-            cmd = 'SELECT * FROM Dish_copy WHERE RIN = %s ORDER BY score desc LIMIT 3;'
+            cmd = 'SELECT * FROM Dish WHERE RIN = %s ORDER BY score desc LIMIT 3;'
             cur.execute(cmd,RIN)
             data_from_db = cur.fetchall()
             self.wfile.write(bytes(json.dumps(data_from_db), "utf8"))
@@ -59,7 +59,7 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
 
         # Get top 50 dishes
         if(params['request_type'][0] == 'top_50'):
-            cmd = 'SELECT d.name, d.img, d.score, r.name, r.RIN FROM Dish_copy d, Restaurant r WHERE d.RIN = r.RIN ORDER BY d.score desc LIMIT 50;'
+            cmd = 'SELECT d.name, d.img, d.score, r.name, r.RIN FROM Dish d, Restaurant r WHERE d.RIN = r.RIN ORDER BY d.score desc LIMIT 50;'
             cur.execute(cmd)
             data_from_db = cur.fetchall()
             self.wfile.write(bytes(json.dumps(data_from_db),"utf8"))
@@ -68,7 +68,7 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
         if(params['request_type'][0] == 'search'):
             keyword = params['keyword'][0]
             keyword = '%' + keyword + '%'
-            cmd = 'SELECT d.name, d.img, d.score, r.name, r.RIN FROM Dish_copy d, Restaurant r WHERE d.RIN = r.RIN AND (d.name LIKE %s OR r.name LIKE %s OR d.description LIKE %s OR d.ingredient LIKE %s OR d.category LIKE %s OR r.category LIKE %s) ORDER BY d.score desc LIMIT 50'
+            cmd = 'SELECT d.name, d.img, d.score, r.name, r.RIN FROM Dish d, Restaurant r WHERE d.RIN = r.RIN AND (d.name LIKE %s OR r.name LIKE %s OR d.description LIKE %s OR d.ingredient LIKE %s OR d.category LIKE %s OR r.category LIKE %s) ORDER BY d.score desc LIMIT 50'
             cur.execute(cmd,[keyword, keyword, keyword, keyword, keyword, keyword])
             data_from_db = cur.fetchall()
             self.wfile.write(bytes(json.dumps(data_from_db),"utf8"))
@@ -78,7 +78,7 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
         if(params['request_type'][0] == 'delete'):
             name = params['name'][0]
             RIN = params['RIN'][0]
-            cmd = 'DELETE FROM Dish_copy WHERE name = %s AND RIN = %s';
+            cmd = 'DELETE FROM Dish WHERE name = %s AND RIN = %s';
             cur.execute(cmd, [name, RIN])
             data_from_db = cur.fetchall()
             print(data_from_db)
@@ -115,7 +115,7 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
             UIN = 1
             dish = params[b'dish'][0].decode()
             RIN =  params[b'RIN'][0].decode()
-            cmd = "INSERT INTO History (date, comment, DIN, UIN) VALUES ((SELECT NOW()), %s, (SELECT DIN FROM Dish_copy WHERE name=%s AND RIN=%s), %s);"
+            cmd = "INSERT INTO History (date, comment, DIN, UIN) VALUES ((SELECT NOW()), %s, (SELECT DIN FROM Dish WHERE name=%s AND RIN=%s), %s);"
             print(cmd%(comment, dish, RIN, UIN))
             cur.execute(cmd, [comment, dish, RIN, UIN])
             db.commit()
@@ -153,4 +153,3 @@ if __name__ == "__main__":
     db = connect_to_db()
     cur = db.cursor()
     run()
-
