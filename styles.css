@@ -15,3 +15,69 @@
 .display-3 {
 	font-size: 24px;
 }
+
+/*Dropdown*/
+
+.dropdown-menu {
+	min-width: 0px !important;
+	font-size: .9em;
+}
+
+.dropdown-header {
+	font-weight: 500;
+}
+
+.dropdown-header, .dropdown-item {
+	padding: 5px 10px;
+	margin: 0px;
+}
+
+/*Like*/
+
+.btn-like {
+	background: transparent;
+}
+
+.btn-like .material-icons, .btn-like span {
+	transition: all ease 0.4s;
+}
+
+.btn-like:focus {
+	background-color: transparent;
+}
+
+.btn-like:focus .material-icons, .btn-like:focus span {
+	color: #8a8a8a;
+}
+
+.btn-like:hover {
+	background-color: transparent;
+}
+
+.btn-like:hover .material-icons, .btn-like:hover span {
+	color: #cc4b37;
+}
+
+.liked {
+	background-color: #cc4b37;
+}
+
+.liked .material-icons, .liked span {
+	color: #fefefe;
+}
+
+.liked:focus {
+	background-color: #cc4b37;
+}
+
+.liked:focus .material-icons, .liked:focus span {
+	color: #fefefe;
+}
+
+.liked:hover {
+	background-color: #cc4b37;
+}
+
+.liked:hover .material-icons, .liked:hover span {
+	color: #fefefe;
+}
