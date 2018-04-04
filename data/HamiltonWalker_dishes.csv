@@ -1,28 +1,27 @@
-DIN,name,description,ingredient,category,calorie,price,img,score,RIN,restaurant
-,Baked Goat Cheese,,"Red pepper sauce, grilled bread, balsamic drizzle.",lunch / dinner / appetizer / starter,,9.99,https://dc8l3mwto1qll.cloudfront.net/assets/munch_images/rilcp00001/thumb/Baked-Goat-Cheese.jpg,0,,Hamilton Walker's
-,Crab Cake,,Remoulade,lunch / dinner / appetizer / starter,,14.99,https://dc8l3mwto1qll.cloudfront.net/assets/munch_images/rilcp00001/thumb/Crab-Cake_preview.jpg,0,,Hamilton Walker's
-,House Salad,,"Mixed greens, cucumber, heirloom tomato, egg, red onion, garlic crouton, tossed with champagne vinaigrette.",lunch / dinner / appetizer / salad,,5.99,https://dc8l3mwto1qll.cloudfront.net/assets/munch_images/rilcp00001/thumb/House-Salad.jpg,0,,Hamilton Walker's
-,Spinach Salad,,"Bacon, mushroom, radish, red onion, egg, garlic croutons, tossed with warm bacon dressing.",lunch / dinner / appetizer / salad,,5.99,https://dc8l3mwto1qll.cloudfront.net/assets/munch_images/rilcp00001/thumb/Spinach-Salad.jpg,0,,Hamilton Walker's
-,Caesar Salad,,"Romaine, garlic crouton, parmigiano-reggiano, tossed with caesar.",lunch / dinner / appetizer / salad,,5.99,https://dc8l3mwto1qll.cloudfront.net/assets/munch_images/rilcp00001/thumb/Caesar-Salad.jpg,0,,Hamilton Walker's
-,Wedge Salad,,"Iceberg lettuce, heirloom tomato, cucumber, bacon, carrot, garlic crouton, french and roquefort.",lunch / dinner / appetizer / salad,,5.99,https://dc8l3mwto1qll.cloudfront.net/assets/munch_images/rilcp00001/thumb/Wedge-Salad.jpg,0,,Hamilton Walker's
-,Chopped Salad,,"Romaine, heirloom tomato, avocado, bacon, aged cheddar, scallion, garlic crouton, tossed with green goddess.",lunch / dinner / appetizer / salad,,10.99,https://dc8l3mwto1qll.cloudfront.net/assets/munch_images/rilcp00001/thumb/Chop-Salad.jpg,0,,Hamilton Walker's
-,Grilled Atlantic Salmon,,Lemon,lunch / entree / main course,,19.99,https://dc8l3mwto1qll.cloudfront.net/assets/munch_images/rilcp00001/thumb/Salmon.jpg,0,,Hamilton Walker's
-,Twin Petites,,Two 3 Oz. filet medallions.,lunch / dinner / entr�e / steak,,23.99,https://dc8l3mwto1qll.cloudfront.net/assets/munch_images/rilcp00001/thumb/Twin-Petit-Steak_preview.jpg,0,,Hamilton Walker's
-,Lamb Lollichops,,Cumberland sauce.,dinner / appetizer / starter,,14.99,https://dc8l3mwto1qll.cloudfront.net/assets/munch_images/rilcp00001/thumb/Lamb-Lolly-Chop.jpg,0,,Hamilton Walker's
-,Oysters Rockefeller,,"Mid-Atlantic, half dozen, baked in herbed butter.",dinner / appetizer / starter,,14.99,https://dc8l3mwto1qll.cloudfront.net/assets/munch_images/rilcp00001/thumb/Oysters-Rockefeller.jpg,0,,Hamilton Walker's
-,Oysters On The Half Shell,,"Mid-Atlantic, cocktail sauce, mignonette sauce.",dinner / appetizer / starter,,11.99,https://dc8l3mwto1qll.cloudfront.net/assets/munch_images/rilcp00001/thumb/Oysters.jpg,0,,Hamilton Walker's
-,Jumbo Shrimp Cocktail,,Cocktail sauce.,dinner / appetizer / starter,,16.99,https://dc8l3mwto1qll.cloudfront.net/assets/munch_images/rilcp00001/thumb/jumbo-shrimp-cocktail1.jpg,0,,Hamilton Walker's
-,Lobster & Crab Bisque,,,dinner / appetizer / soup,,6.99,https://dc8l3mwto1qll.cloudfront.net/assets/munch_images/rilcp00001/thumb/Lobster-Bisque.jpg,0,,Hamilton Walker's
-,Baseball Top Sirloin,8 Oz.,,dinner / entree / steak,,28.99,https://dc8l3mwto1qll.cloudfront.net/assets/munch_images/rilcp00001/thumb/Baseball-Steak.jpg,0,,Hamilton Walker's
-,New York Strip,12 Oz.,,dinner / entree / steak,,39.99,https://dc8l3mwto1qll.cloudfront.net/assets/munch_images/rilcp00001/thumb/NY-Strip-Steak_preview.jpg,0,,Hamilton Walker's
-,Bone In Ribeye,16 Oz.,,dinner / entree / steak,,39.99,https://dc8l3mwto1qll.cloudfront.net/assets/munch_images/rilcp00001/thumb/bone-in-rib-eye1.jpg,0,,Hamilton Walker's
-,Filet Mignon,Center-cut.,,dinner / entree / steak,,33.99,https://dc8l3mwto1qll.cloudfront.net/assets/munch_images/rilcp00001/thumb/filet-mignon2.jpg,0,,Hamilton Walker's
-,Steak Fries,,,dinner / side,,6.99,https://dc8l3mwto1qll.cloudfront.net/assets/munch_images/rilcp00001/thumb/Fries.jpg,0,,Hamilton Walker's
-,Sauteed Mushrooms,,,dinner / side,,6.99,https://dc8l3mwto1qll.cloudfront.net/assets/munch_images/rilcp00001/thumb/Sauteed-Mushrooms.jpg,0,,Hamilton Walker's
-,Sauteed Green Beans With Garlic,,,dinner / side,,6.99,https://dc8l3mwto1qll.cloudfront.net/assets/munch_images/rilcp00001/thumb/sauteed-green-beans-in-garlic1.jpg,0,,Hamilton Walker's
-,Twice Baked Potato,,,dinner / side,,6.99,https://dc8l3mwto1qll.cloudfront.net/assets/munch_images/rilcp00001/thumb/twice-baked-potato1.jpg,0,,Hamilton Walker's
-,Baked Alaska,,"Vanilla cake, chocolate Shoppe strawberry ice cream, meringue, Belgian chocolate sauce.",dessert,,7.99,https://dc8l3mwto1qll.cloudfront.net/assets/munch_images/rilcp00001/thumb/Baked-Alaska.jpg,0,,Hamilton Walker's
-,HW's Bread Pudding,,"Raisins, bourbon sauce.",dessert,,5.99,https://dc8l3mwto1qll.cloudfront.net/assets/munch_images/rilcp00001/thumb/Bread-Pudding.jpg,0,,Hamilton Walker's
-,Creme Brulee,,Fresh strawberry.,dessert,,6.99,https://dc8l3mwto1qll.cloudfront.net/assets/munch_images/rilcp00001/thumb/Creme-Brulee.jpg,0,,Hamilton Walker's
-,Triple Layer Chocolate Cake,,Belgian chocolate sauce.,dessert,,5.99,https://dc8l3mwto1qll.cloudfront.net/assets/munch_images/rilcp00001/thumb/Triple-Chocolate-Cake.jpg,0,,Hamilton Walker's
-,New York Cheese Cake,,Seasonal fresh berries.,dessert,,5.99,https://dc8l3mwto1qll.cloudfront.net/assets/munch_images/rilcp00001/thumb/new-york-cheese-cake1.jpg,0,,Hamilton Walker's
+Baked Goat Cheese,,"Red pepper sauce, grilled bread, balsamic drizzle.",lunch / dinner / appetizer / starter,,9.99,https://dc8l3mwto1qll.cloudfront.net/assets/munch_images/rilcp00001/thumb/Baked-Goat-Cheese.jpg,0,,Hamilton Walker's
+Crab Cake,,Remoulade,lunch / dinner / appetizer / starter,,14.99,https://dc8l3mwto1qll.cloudfront.net/assets/munch_images/rilcp00001/thumb/Crab-Cake_preview.jpg,0,,Hamilton Walker's
+House Salad,,"Mixed greens, cucumber, heirloom tomato, egg, red onion, garlic crouton, tossed with champagne vinaigrette.",lunch / dinner / appetizer / salad,,5.99,https://dc8l3mwto1qll.cloudfront.net/assets/munch_images/rilcp00001/thumb/House-Salad.jpg,0,,Hamilton Walker's
+Spinach Salad,,"Bacon, mushroom, radish, red onion, egg, garlic croutons, tossed with warm bacon dressing.",lunch / dinner / appetizer / salad,,5.99,https://dc8l3mwto1qll.cloudfront.net/assets/munch_images/rilcp00001/thumb/Spinach-Salad.jpg,0,,Hamilton Walker's
+Caesar Salad,,"Romaine, garlic crouton, parmigiano-reggiano, tossed with caesar.",lunch / dinner / appetizer / salad,,5.99,https://dc8l3mwto1qll.cloudfront.net/assets/munch_images/rilcp00001/thumb/Caesar-Salad.jpg,0,,Hamilton Walker's
+Wedge Salad,,"Iceberg lettuce, heirloom tomato, cucumber, bacon, carrot, garlic crouton, french and roquefort.",lunch / dinner / appetizer / salad,,5.99,https://dc8l3mwto1qll.cloudfront.net/assets/munch_images/rilcp00001/thumb/Wedge-Salad.jpg,0,,Hamilton Walker's
+Chopped Salad,,"Romaine, heirloom tomato, avocado, bacon, aged cheddar, scallion, garlic crouton, tossed with green goddess.",lunch / dinner / appetizer / salad,,10.99,https://dc8l3mwto1qll.cloudfront.net/assets/munch_images/rilcp00001/thumb/Chop-Salad.jpg,0,,Hamilton Walker's
+Grilled Atlantic Salmon,,Lemon,lunch / entree / main course,,19.99,https://dc8l3mwto1qll.cloudfront.net/assets/munch_images/rilcp00001/thumb/Salmon.jpg,0,,Hamilton Walker's
+Twin Petites,,Two 3 Oz. filet medallions.,lunch / dinner / entre / steak,,23.99,https://dc8l3mwto1qll.cloudfront.net/assets/munch_images/rilcp00001/thumb/Twin-Petit-Steak_preview.jpg,0,,Hamilton Walker's
+Lamb Lollichops,,Cumberland sauce.,dinner / appetizer / starter,,14.99,https://dc8l3mwto1qll.cloudfront.net/assets/munch_images/rilcp00001/thumb/Lamb-Lolly-Chop.jpg,0,,Hamilton Walker's
+Oysters Rockefeller,,"Mid-Atlantic, half dozen, baked in herbed butter.",dinner / appetizer / starter,,14.99,https://dc8l3mwto1qll.cloudfront.net/assets/munch_images/rilcp00001/thumb/Oysters-Rockefeller.jpg,0,,Hamilton Walker's
+Oysters On The Half Shell,,"Mid-Atlantic, cocktail sauce, mignonette sauce.",dinner / appetizer / starter,,11.99,https://dc8l3mwto1qll.cloudfront.net/assets/munch_images/rilcp00001/thumb/Oysters.jpg,0,,Hamilton Walker's
+Jumbo Shrimp Cocktail,,Cocktail sauce.,dinner / appetizer / starter,,16.99,https://dc8l3mwto1qll.cloudfront.net/assets/munch_images/rilcp00001/thumb/jumbo-shrimp-cocktail1.jpg,0,,Hamilton Walker's
+Lobster & Crab Bisque,,,dinner / appetizer / soup,,6.99,https://dc8l3mwto1qll.cloudfront.net/assets/munch_images/rilcp00001/thumb/Lobster-Bisque.jpg,0,,Hamilton Walker's
+Baseball Top Sirloin,8 Oz.,,dinner / entree / steak,,28.99,https://dc8l3mwto1qll.cloudfront.net/assets/munch_images/rilcp00001/thumb/Baseball-Steak.jpg,0,,Hamilton Walker's
+New York Strip,12 Oz.,,dinner / entree / steak,,39.99,https://dc8l3mwto1qll.cloudfront.net/assets/munch_images/rilcp00001/thumb/NY-Strip-Steak_preview.jpg,0,,Hamilton Walker's
+Bone In Ribeye,16 Oz.,,dinner / entree / steak,,39.99,https://dc8l3mwto1qll.cloudfront.net/assets/munch_images/rilcp00001/thumb/bone-in-rib-eye1.jpg,0,,Hamilton Walker's
+Filet Mignon,Center-cut.,,dinner / entree / steak,,33.99,https://dc8l3mwto1qll.cloudfront.net/assets/munch_images/rilcp00001/thumb/filet-mignon2.jpg,0,,Hamilton Walker's
+Steak Fries,,,dinner / side,,6.99,https://dc8l3mwto1qll.cloudfront.net/assets/munch_images/rilcp00001/thumb/Fries.jpg,0,,Hamilton Walker's
+Sauteed Mushrooms,,,dinner / side,,6.99,https://dc8l3mwto1qll.cloudfront.net/assets/munch_images/rilcp00001/thumb/Sauteed-Mushrooms.jpg,0,,Hamilton Walker's
+Sauteed Green Beans With Garlic,,,dinner / side,,6.99,https://dc8l3mwto1qll.cloudfront.net/assets/munch_images/rilcp00001/thumb/sauteed-green-beans-in-garlic1.jpg,0,,Hamilton Walker's
+Twice Baked Potato,,,dinner / side,,6.99,https://dc8l3mwto1qll.cloudfront.net/assets/munch_images/rilcp00001/thumb/twice-baked-potato1.jpg,0,,Hamilton Walker's
+Baked Alaska,,"Vanilla cake, chocolate Shoppe strawberry ice cream, meringue, Belgian chocolate sauce.",dessert,,7.99,https://dc8l3mwto1qll.cloudfront.net/assets/munch_images/rilcp00001/thumb/Baked-Alaska.jpg,0,,Hamilton Walker's
+HW's Bread Pudding,,"Raisins, bourbon sauce.",dessert,,5.99,https://dc8l3mwto1qll.cloudfront.net/assets/munch_images/rilcp00001/thumb/Bread-Pudding.jpg,0,,Hamilton Walker's
+Creme Brulee,,Fresh strawberry.,dessert,,6.99,https://dc8l3mwto1qll.cloudfront.net/assets/munch_images/rilcp00001/thumb/Creme-Brulee.jpg,0,,Hamilton Walker's
+Triple Layer Chocolate Cake,,Belgian chocolate sauce.,dessert,,5.99,https://dc8l3mwto1qll.cloudfront.net/assets/munch_images/rilcp00001/thumb/Triple-Chocolate-Cake.jpg,0,,Hamilton Walker's
+New York Cheese Cake,,Seasonal fresh berries.,dessert,,5.99,https://dc8l3mwto1qll.cloudfront.net/assets/munch_images/rilcp00001/thumb/new-york-cheese-cake1.jpg,0,,Hamilton Walker's
