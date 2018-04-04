@@ -29,10 +29,14 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
         if(params['request_type'][0] == 'find_dish'):
             name = params['name'][0]
             RIN = params['RIN'][0]
-            cmd = 'SELECT * FROM Dish WHERE name = %s AND RIN = %s;'
+            cmd = 'SELECT * FROM Dish_copy WHERE name = %s AND RIN = %s;'
             cur.execute(cmd,[name, RIN])
             data_from_db = cur.fetchall()
             self.wfile.write(bytes(json.dumps(data_from_db), "utf8"))
+            # Increment the score by one of this dish
+            cmd = 'UPDATE Dish_copy SET score = score + 1 WHERE name = %s AND RIN = %s;'
+            cur.execute(cmd, [name, RIN])
+            db.commit()
             return
 
         # Get a single restaurant
@@ -44,14 +48,44 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
             self.wfile.write(bytes(json.dumps(data_from_db), "utf8"))
             return
 
-        # Get a single restaurant
+        # Get top dishes of this restaurant
         if(params['request_type'][0] == 'top_dishes'):
             RIN = params['RIN'][0]
-            cmd = 'SELECT * FROM Dish WHERE RIN = %s ORDER BY score LIMIT 3;'
+            cmd = 'SELECT * FROM Dish_copy WHERE RIN = %s ORDER BY score desc LIMIT 3;'
             cur.execute(cmd,RIN)
             data_from_db = cur.fetchall()
             self.wfile.write(bytes(json.dumps(data_from_db), "utf8"))
             return
+
+        # Get top 50 dishes
+        if(params['request_type'][0] == 'top_50'):
+            cmd = 'SELECT d.name, d.img, d.score, r.name, r.RIN FROM Dish_copy d, Restaurant r WHERE d.RIN = r.RIN ORDER BY d.score desc LIMIT 50;'
+            cur.execute(cmd)
+            data_from_db = cur.fetchall()
+            self.wfile.write(bytes(json.dumps(data_from_db),"utf8"))
+            return
+
+        if(params['request_type'][0] == 'search'):
+            keyword = params['keyword'][0]
+            keyword = '%' + keyword + '%'
+            cmd = 'SELECT d.name, d.img, d.score, r.name, r.RIN FROM Dish_copy d, Restaurant r WHERE d.RIN = r.RIN AND (d.name LIKE %s OR r.name LIKE %s OR d.description LIKE %s OR d.ingredient LIKE %s OR d.category LIKE %s OR r.category LIKE %s) ORDER BY d.score desc LIMIT 50'
+            cur.execute(cmd,[keyword, keyword, keyword, keyword, keyword, keyword])
+            data_from_db = cur.fetchall()
+            self.wfile.write(bytes(json.dumps(data_from_db),"utf8"))
+            return
+
+        # Delete an entry from the database
+        if(params['request_type'][0] == 'delete'):
+            name = params['name'][0]
+            RIN = params['RIN'][0]
+            cmd = 'DELETE FROM Dish_copy WHERE name = %s AND RIN = %s';
+            cur.execute(cmd, [name, RIN])
+            data_from_db = cur.fetchall()
+            print(data_from_db)
+            db.commit()
+            self.wfile.write(bytes(json.dumps({'Status': 'OK'}),"utf8"))
+            return
+
 
         # Send message back to client
         message = json.dumps(["hello",{"message": "world"}])
@@ -62,17 +96,33 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
     # POST
     def do_POST(self):
 
-        self._set_headers()
         # Parse data
         length = int(self.headers.get('content-length'))
         field_data = self.rfile.read(length)
-        fields = parse_qs(field_data)
-        print(fields)
+        params = parse_qs(field_data)
+        print(params)
 
-        message = json.dumps(["hello",{"message": "world"}])
-        # Write content as utf-8 data
-        self.wfile.write(bytes(message, "utf8"))
-        return
+
+        if (b'request_type' not in params):
+            return
+
+        # send the headers
+        self._set_headers()
+
+        # Handle comment upload case
+        if(params[b'request_type'][0] == b'comment_upload'):
+            comment = params[b'content'][0].decode()
+            UIN = 1
+            dish = params[b'dish'][0].decode()
+            RIN =  params[b'RIN'][0].decode()
+            cmd = "INSERT INTO History (date, comment, DIN, UIN) VALUES ((SELECT NOW()), %s, (SELECT DIN FROM Dish_copy WHERE name=%s AND RIN=%s), %s);"
+            print(cmd%(comment, dish, RIN, UIN))
+            cur.execute(cmd, [comment, dish, RIN, UIN])
+            db.commit()
+            message = json.dumps({'Status': 'OK', 'Message': 'SUCCEED'})
+            # Write content as utf-8 data
+            self.wfile.write(bytes(message, "utf8"))
+            return
 
 
 def run():
@@ -103,3 +153,4 @@ if __name__ == "__main__":
     db = connect_to_db()
     cur = db.cursor()
     run()
+
