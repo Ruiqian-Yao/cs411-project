@@ -34,7 +34,7 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
             data_from_db = cur.fetchall()
             self.wfile.write(bytes(json.dumps(data_from_db), "utf8"))
             # Increment the score by one of this dish
-            cmd = 'UPDATE Dish SET score = score + 1 WHERE name = %s AND RIN = %s;'
+            cmd = 'UPDATE Dish_copy SET score = score + 1 WHERE name = %s AND RIN = %s;'
             cur.execute(cmd, [name, RIN])
             db.commit()
             return
@@ -48,10 +48,10 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
             self.wfile.write(bytes(json.dumps(data_from_db), "utf8"))
             return
 
-        # Get a single restaurant
+        # Get top dishes of this restaurant
         if(params['request_type'][0] == 'top_dishes'):
             RIN = params['RIN'][0]
-            cmd = 'SELECT * FROM Dish_copy WHERE RIN = %s ORDER BY score LIMIT 3;'
+            cmd = 'SELECT * FROM Dish_copy WHERE RIN = %s ORDER BY score desc LIMIT 3;'
             cur.execute(cmd,RIN)
             data_from_db = cur.fetchall()
             self.wfile.write(bytes(json.dumps(data_from_db), "utf8"))
@@ -153,3 +153,4 @@ if __name__ == "__main__":
     db = connect_to_db()
     cur = db.cursor()
     run()
+
