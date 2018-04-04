@@ -7,214 +7,153 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="styles.css">
 
+
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script>
- 
-//helper function that parse the url
-function getJsonFromUrl() {
-  var query = location.search.substr(1);
-  var result = {};
-  query.split("&").forEach(function(part) {
-    var item = part.split("=");
-    result[item[0]] = decodeURIComponent(item[1]);
-  });
-  return result;
+    
+function load(data){
+    // delete the existing dish entries
+    var top_50_dishes = $("#top_50_dishes");
+    top_50_dishes.empty();
+    // Add new dish entries
+    for(var i=0;i<data.length;i++){
+        var d_name = data[i]['name'];
+        var d_name_url = encodeURIComponent(d_name);
+        var img = data[i]['img'];
+        var score = data[i]['score'];
+        var r_name = data[i]['r.name'];
+        var RIN = data[i]['RIN'];
+        var href_link = '/dish_detail.html?name='+d_name_url+'&RIN='+RIN;
+        console.log(href_link);
+            
+        var new_entry= '<div class="col-12 col-sm-4">\
+                        <div class="card" style="width: 18rem; margin:10px;">\
+                            <a href="'+href_link+'"><img class="card-img-top" src="' + img + '"'+
+                            'alt=""></a>\
+                            <div class="card-body">\
+                                <h5 class="card-title">'+d_name+'</h5>\
+                                <div class="d-inline-flex">\
+                                    <p>'+score+'</p>\
+                                    <i class="material-icons">favorite</i>\
+                                </div>\
+                                <div class="row">\
+                                    <p class="col-12 col-sm-6">Restaurant:</p>\
+                                    <p class="col-12 col-sm-6">'+r_name+'</p>\
+                                </div>\
+                            </div>\
+                        </div>\
+                        </div>';
+        top_50_dishes.append(new_entry);
+    }
 }
     
 $(document).ready(function(){
-    params = getJsonFromUrl();
     
-    // Get the dish info
-    $.get("http://192.17.90.133:8081",{request_type:'find_dish', name:params['name'], RIN:params['RIN']}, function(data){
-        dish = data[0]
-        console.log(dish);
-		$("#dish_name").text(dish['name']);
-		$("#dish_category").text(dish['category']);
-		$("#dish_score").text(dish['score']);
-        if (dish['price'] != 0){
-            $("#price").text(dish['price']);
-        }
-        if (dish['calorie'] != 0){
-            $("#calorie").text(dish['calorie']);
-        }
-        if (dish['description'] != ""){
-            $("#description").text(dish['description']);
-        }else{
-            $("#description_tag").hide();
-        }
-        if (dish['ingredient'] != ""){
-            $("#ingredient").text(dish['ingredient']);
-        }else{
-            $("#ingredient_tag").hide();
-        }
-        $("#image").attr("src", dish['img']);
-    });
-    
-    // Get the restaurant info
-    $.get("http://192.17.90.133:8081",{request_type:'find_restaurant', RIN:params['RIN']}, function(data){
-        restaurant = data[0]
-        console.log(restaurant);
-        $("#restaurant_name").text(restaurant['name']);
-        $("#address").text(restaurant['address']);
-        $("#website").attr("href", restaurant['website']);
-        $("#website").text(restaurant['website']);
-    });
-    
-    // Get top dishes of this restaurant
-    $.get("http://192.17.90.133:8081",{request_type:'top_dishes', RIN:params['RIN']}, function(data){
+    // Get top 50 dishes
+    $.get("http://192.17.90.133:8081",{request_type:"top_50"},function(data){
         console.log(data);
-        
-        for(var i=0; i<3; i++){
-            var dish = data[i];
-            var dish_name = dish['name'];
-            var dish_image = dish['img'];
-            var dish_url_format = encodeURIComponent(dish_name);
-            var file_url = window.location.href.split('?')[0];
-            
-            $("#top_dishes").append('<div class="col-12 col-sm-4">\
-						<figure class="figure">\
-                        <a href ="' + file_url+'?name='+dish_url_format+'&RIN='+params['RIN']+'">'+
-							'<img src="' + dish_image +'"' +
-                            'class="figure-img img-fluid rounded" alt="Image">\
-                            </a>\
-							<figcaption class="figure-caption">' + dish_name +
-                            '</figcaption>\
-						</figure>\
-					</div>');
-        }
+        load(data);
     });
-});
-</script>
-</head>
     
+    // Search button click event
+    $("#search_button").click(function() {
+        var search_text = $("#search_input").val();
+        if (search_text == ""){
+            return;
+        }
+        $.get("http://192.17.90.133:8081",{request_type:"search", keyword:search_text},function(data){
+            load(data);
+        });
+    });
+    
+    $('.dropdown-toggle').dropdown();
+    
+    });
+
+</script>   
+</head>
+
+
 <body>
-	<div class="container">
-		<div class="row">
-			<div class="col-12 col-sm-7">
-				<div class="jumbotron">
-					<h1 class="display-1" id = "dish_name">Dish Name</h1>
-					<img id="image" src="" class="img-fluid" alt="Responsive image">
-					<div class="d-flex justify-content-end">
-						<p id ="dish_score"></p>
-						<i class="material-icons">favorite_border</i>
-					</div>
-					<form>
-						<div>
-							<label>Write Your Comments</label>
-							<textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-						</div>
-					</form>
-					<div class="d-flex justify-content-end"><button type="button" class="btn btn-outline-primary">post</button></div>
-				</div>
-			</div>
-			<div class="col-12 col-sm-5">
-				<div class="container" style="margin: 20px auto">
-					<div class="row">
-						<div class="col-9">
-							<ul class="nav">
-								<li class="nav-item">
-									<a class="nav-link" href="#">Home</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link" href="#">History</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link" href="#">Log Out</a>
-								</li>
-							</ul>
-						</div>
-						<div class="col-3">
-							<figure class="figure">
-								<img src="if_grapes_2003194.png" class="figure-img img-fluid rounded" alt="Sumerinlan">
-								<figcaption class="figure-caption">Sumerinlan</figcaption>
-							</figure>
-						</div>
-					</div>
-				</div>
-				<div class="container" style="padding:0px">
-					<div class="row">
-						<div class="col-4">
-							<p>Category</p>
-						</div>
-						<div class="col-8">
-							<p id="dish_category">a category</p>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-4">
-							<p>Price</p>
-						</div>
-						<div class="col-8">
-							<p id="price">(No data)</p>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-4">
-							<p>Calorie</p>
-						</div>
-						<div class="col-8">
-							<p id="calorie">(No data)</p>
-						</div>
-					</div>
-                    <div class="row" id="description_tag">
-						<div class="col-4">
-							<p>Description</p>
-						</div>
-						<div class="col-8">
-							<p id="description">A simple description</p>
-						</div>
-					</div>
-					<div class="row" id="ingredient_tag">
-						<div class="col-4">
-							<p>Ingredient</p>
-						</div>
-						<div class="col-8">
-							<p id="ingredient">Some ingredient</p>
-						</div>
-					</div>
-				</div>
-				<hr />
-				<div class="row">
-					<div class="col-12">
-						<h2 class="display-2" id="restaurant_name">Miga Restaurant</h2>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-12 col-sm-9">
-						<div class="container" style="padding:0px">
-							<div class="row">
-								<div class="col-3">
-									<p>Address</p>
-								</div>
-								<div class="col-9">
-									<p id="address">301 N Neil St #104, Champaign, Il 61820</p>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-3">
-									<p>Website</p>
-								</div>
-								<div class="col-9">
-									<a id="website" href="http://miga-restaurant.com/" , target="_blank">http://miga-restaurant.com/</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-12 col-sm-3">
-						<p>Google Map</p>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-12">
-					<p>Top Choices</p>
-				</div>
-				</div>
-				<div class="row" id="top_dishes">
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="containter">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="col-12 col-sm-7">
+                <div class="d-flex align-items-end">
+                    <!-- <form class=""> -->
+                            <div class="form-group col-md-9">
+                            <input class="form-control" type="search" placeholder="Search" aria-label="Search" id="search_input">  
+                            </div>
+                            <div class="form-group col-md-3">
+                                <button class="btn btn-outline-success" type="submit" id="search_button">Search</button>
+                            </div>                          
+                    <!-- </form>  -->
+                </div>               
+            </div>
+
+            <div class="col-12 col-sm-5">
+                <ul class="nav d-flex flex-row-reverse">
+                    <li class="nav-item col-3 dropdown dropdown-menu-right">
+                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img src="if_grapes_2003194.png" class="img-fluid rounded" alt="Sumerinlan" style="width: 50%">
+                            </a>
+                          
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+                              <a class="dropdown-item" href="#">History</a>
+                              <a class="dropdown-item" href="#">User Account</a>
+                              <a class="dropdown-item" href="#">Log out</a>
+                            </div>
+                    </li>                    
+                    <li class="nav-item col-3">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <!-- <li class="nav-item col-3">
+                        <a class="nav-link" href="#">History</a>
+                    </li>
+                    <li class="nav-item col-3">
+                        <a class="nav-link" href="#">Log Out</a>
+                    </li>
+                    <li class="nav-item col-3">
+                        <a><img src="if_grapes_2003194.png" class="img-fluid rounded" alt="Sumerinlan" style="width: 50%"></a>
+                    </li> -->
+                </ul>
+            </div>
+        </nav>
+        
+        <div class="container-fluid">
+            <div class="row" style="padding-top: 20px">
+                <div class="col-12 col-sm-3">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-header">Filter</div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <input type="checkbox">
+                                <label>Sushi</label>
+                            </li>
+                            <li class="list-group-item">
+                                    <input type="checkbox">
+                                    <label>American</label>
+                            </li>
+                            <li class="list-group-item">
+                                    <input type="checkbox">
+                                    <label>Steak</label>
+                            </li>
+                        </ul>
+                    </div>                                  
+                </div>
+
+
+                <div class="col-12 col-sm-9">
+                    <div class="row" id = "top_50_dishes">
+                    </div>                      
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
 </body>
 
 </html>
