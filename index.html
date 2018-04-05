@@ -26,7 +26,6 @@ function load(data){
         var r_name = data[i]['r.name'];
         var RIN = data[i]['RIN'];
         var href_link = '/dish_detail.html?name='+d_name_url+'&RIN='+RIN;
-        console.log(href_link);
 
         var new_entry= '<div class="col-12 col-sm-4">\
                         <div class="card" style="width: 18rem; margin:10px;">\
@@ -50,12 +49,11 @@ function load(data){
 }
     
 $(document).ready(function(){
-    
     // Get top 50 dishes
     $.get("http://192.17.90.133:8081",{request_type:"top_50"},function(data){
-        console.log(data);
         load(data);
     });
+    
     // Search button click event
     $("#search_button").click(function() {
         var search_text = $("#search_input").val();
@@ -67,14 +65,30 @@ $(document).ready(function(){
         });
     });
 
-    
     $('.dropdown-toggle').dropdown();
-    
     });
+</script>  
+    
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<meta name="google-signin-client_id" content="484916142950-akin6or24u1qs4vqi0g9khf2asjbhlpg.apps.googleusercontent.com">
+<script>
+function onSignIn(googleUser) {
+    var profile = googleUser.getBasicProfile();
+    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+    console.log('Name: ' + profile.getName());
+    console.log('Image URL: ' + profile.getImageUrl());
+    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+}
 
-</script>   
+function getOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+    console.log('User signed out.');
+    });
+}
+</script>
+    
 </head>
-
 
 <body>
     <div class="containter">
@@ -104,6 +118,8 @@ $(document).ready(function(){
                               <a class="dropdown-item" href="#">History</a>
                               <a class="dropdown-item" href="#">User Account</a>
                               <a class="dropdown-item" href="#">Log out</a>
+                              <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                              <a href="#" onclick="getOut();">Sign out</a>
                             </div>
 
                     </li>                    
