@@ -112,12 +112,12 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
         # Handle comment upload case
         if(params[b'request_type'][0] == b'comment_upload'):
             comment = params[b'content'][0].decode()
-            UIN = 1
+            User = params[b'user'][0].decode()
             dish = params[b'dish'][0].decode()
             RIN =  params[b'RIN'][0].decode()
-            cmd = "INSERT INTO History (date, comment, DIN, UIN) VALUES ((SELECT NOW()), %s, (SELECT DIN FROM Dish WHERE name=%s AND RIN=%s), %s);"
-            print(cmd%(comment, dish, RIN, UIN))
-            cur.execute(cmd, [comment, dish, RIN, UIN])
+            cmd = "INSERT INTO History (date, comment, DIN, User) VALUES ((SELECT NOW()), %s, (SELECT DIN FROM Dish WHERE name=%s AND RIN=%s), %s);"
+            print(cmd%(comment, dish, RIN, User))
+            cur.execute(cmd, [comment, dish, RIN, User])
             db.commit()
             message = json.dumps({'Status': 'OK', 'Message': 'SUCCEED'})
             # Write content as utf-8 data
