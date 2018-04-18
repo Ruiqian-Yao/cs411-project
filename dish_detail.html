@@ -13,9 +13,9 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-<script>
-        var user_name = "";
-        var user_profile = "";
+	<script>
+		var user_name = "";
+		var user_profile = "";
 
 		//helper function that parse the url
 		function getJsonFromUrl() {
@@ -122,10 +122,10 @@
 
 			// Comment post
 			$("#post").click(function() {
-                if (user_name == ""){
-                    alert("Please login first");
-                    return;
-                }
+				if (user_name == "") {
+					alert("Please login first");
+					return;
+				}
 				var comment = $("#comment_input").val();
 				if (comment == "") {
 					return;
@@ -135,7 +135,7 @@
 				$.post("http://192.17.90.133:8081", {
 					request_type: 'comment_upload',
 					content: comment,
-                    user: user_name,
+					user: user_name,
 					dish: dish,
 					RIN: RIN
 				}, function(data) {
@@ -144,7 +144,7 @@
 				});
 			});
 
-            // Delete the entry from the database
+			// Delete the entry from the database
 			$("#delete").click(function() {
 				$.get("http://192.17.90.133:8081", {
 					request_type: 'delete',
@@ -163,60 +163,86 @@
 					$(".btn-like").toggleClass("liked");
 				})
 		});
-</script>
+	</script>
 
-<script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
-<meta name="google-signin-client_id" content="484916142950-akin6or24u1qs4vqi0g9khf2asjbhlpg.apps.googleusercontent.com">
-<script>
+	<script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+	<meta name="google-signin-client_id" content="484916142950-akin6or24u1qs4vqi0g9khf2asjbhlpg.apps.googleusercontent.com">
+	<script>
+		function init() {
+			gapi.load('auth2', function() {});
+		}
 
-function init() {
-  gapi.load('auth2', function() {
-  });
-}
-function onSignIn(googleUser) {
-    var profile = googleUser.getBasicProfile();
-    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-    console.log('Name: ' + profile.getName());
-    user_name = profile.getName();
-    console.log('Image URL: ' + profile.getImageUrl());
-    user_profile = profile.getImageUrl();
-    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-}
+		function onSignIn(googleUser) {
+			var profile = googleUser.getBasicProfile();
+			console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+			console.log('Name: ' + profile.getName());
+			user_name = profile.getName();
+			console.log('Image URL: ' + profile.getImageUrl());
+			user_profile = profile.getImageUrl();
+			console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
 
-function getOut() {
-    var auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then(function () {
-    console.log('User signed out.');
-    user_name = "";
-    user_profile = "";
-    });
-}
-</script>
-    
+			// user info
+			document.getElementById('username').innerHTML = user_name;
+			document.getElementById('usericon').src = user_profile
+
+			// change visibility
+			var elems = document.getElementsByClassName('usr_related');
+			for (var i = 0; i != elems.length; ++i) {
+				elems[i].style.display = "block";
+			}
+			var elem = document.getElementById('signin');
+			elem.style.display = "none";
+		}
+
+		function getOut() {
+			var auth2 = gapi.auth2.getAuthInstance();
+			auth2.signOut().then(function() {
+				console.log('User signed out.');
+				user_name = "";
+				user_profile = "";
+			});
+			var elems = document.getElementsByClassName('usr_related');
+			for (var i = 0; i != elems.length; ++i) {
+				elems[i].style.display = "none";
+			}
+			var elem = document.getElementById('signin');
+			elem.style.display = "block";
+		}
+	</script>
+
 </head>
 
 <body>
 	<!-- nav bar, absolute position -->
-	<nav class="navbar navbar-expand-lg" style="width:120px;height:60px;position:absolute;right:0px;top:0px">
-		<div class="dropdown">
-			<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				<img src="if_grapes_2003194.png" class="img-fluid rounded" style="width:40px;height:40px">
-  			</button>
-			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-				<a class="dropdown-header">Sumerinlan</a>
-				<a class="dropdown-item" href="http://upversion.web.engr.illinois.edu/">Home</a>
-				<a class="dropdown-item" href="#">History</a>
-				<a class="dropdown-item" href="#">Log out</a>
-                <div class="g-signin2" data-onsuccess="onSignIn"></div>
-                <a href="#" onclick="getOut();">Sign out</a>
-			</div>
+
+	<nav class="navbar navbar-expand-lg navbar-light bg-fade">
+		<div class="col-12 col-md-9">
+			<a class="navbar-brand" href="http://upversion.web.engr.illinois.edu/">Food Quest</a>
+		</div>
+		<div class="col-12 col-md-3">
+			<ul class="navbar-nav d-flex flex-row-reverse">
+				<li class="nav-item" style="padding-right: 10px;">
+					<div class="g-signin2" data-onsuccess="onSignIn" id="signin" data-width="200" data-longtitle="true"></div>
+				</li>
+				<li class="nav-item dropdown usr_related" style="display:none;" style="padding-right: 10px;">
+					<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color:transparent;padding:0px;">
+						<img src="if_grapes_2003194.png" class="img-fluid rounded" style="width:40px;height:40px" id="usericon">
+	  				</button>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+						<a class="dropdown-header" id="username">Sumerinlan</a>
+						<a class="dropdown-item" href="http://upversion.web.engr.illinois.edu/">Home</a>
+						<a class="dropdown-item" href="http://upversion.web.engr.illinois.edu/user_page.html">History</a>
+						<a class="dropdown-item" href="#" onclick="getOut();">Sign out</a>
+					</div>
+				</li>
+			</ul>
 		</div>
 	</nav>
 
-	<div class="container" style="height:100vh">
+	<div class="container">
 		<div class="row">
-			<div class="col-12 col-sm-6">
-				<div class="jumbotron bg-light" style="height:100%;margin:0px;">
+			<div class="col-12 col-sm-7">
+				<div class="jumbotron bg-light">
 					<h1 class="display-1" id="dish_name">Dish Name</h1>
 					<img id="image" src="" class="img-fluid" alt="Responsive image">
 					<div class="d-flex justify-content-end">
@@ -251,90 +277,83 @@ function getOut() {
 							</div>
 						</div>
 					</div>
-					<!-- <button type="button" class="btn btn-outline-primary" id="delete">Delete this dish</button> -->
-				</div>
-			</div>
-			<div class="col-12 col-sm-6" style="padding-top: 60px">
-				<div class="container">
 					<div class="row">
-						<div class="col-3">
+						<div class="col-4">
 							<p>Category</p>
 						</div>
-						<div class="col-9">
-
+						<div class="col-8">
 							<p id="dish_category">a category</p>
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-3">
+						<div class="col-4">
 							<p>Price</p>
 						</div>
-						<div class="col-9">
+						<div class="col-8">
 							<p id="price">(No data)</p>
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-3">
+						<div class="col-4">
 							<p>Calorie</p>
 						</div>
-						<div class="col-9">
+						<div class="col-8">
 							<p id="calorie">(No data)</p>
 						</div>
 					</div>
 					<div class="row" id="description_tag">
-						<div class="col-3">
+						<div class="col-4">
 							<p>Description</p>
 						</div>
-						<div class="col-9">
+						<div class="col-8">
 							<p id="description">A simple description</p>
 						</div>
 					</div>
 					<div class="row" id="ingredient_tag">
-						<div class="col-3">
+						<div class="col-4">
 							<p>Ingredient</p>
 						</div>
-						<div class="col-9">
+						<div class="col-8">
 							<p id="ingredient">Some ingredient</p>
 						</div>
 					</div>
 				</div>
-				<hr />
+			</div>
 
-				<div class="row">
-					<div class="col-12">
-						<h2 class="display-2" id="restaurant_name">Restaurant Name</h2>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-12 col-sm-8">
-						<div class="container" style="padding:0px">
-							<div class="row">
-								<div class="col-3">
-									<p>Address</p>
-								</div>
-								<div class="col-9">
-									<p id="address">Address</p>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-3">
-									<p>Website</p>
-								</div>
-								<div class="col-9">
-									<a id="website" href="http://upversion.web.engr.illinois.edu/" , target="_blank">http://upversion.web.engr.illinois.edu/</a>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-12">
-									<p>Top Choices</p>
-								</div>
-							</div>
-							<div class="row" id="top_dishes">
-							</div>
+			<div class="col-12 col-sm-5" style="padding-top: 80px;">
+				<div class="container">
+					<div class="row">
+						<div class="col-12">
+							<h2 class="display-2" id="restaurant_name">Restaurant Name</h2>
 						</div>
 					</div>
-					<div id="googleMap" class="col-12 col-sm-4">
-						<p>Google Map</p>
+					<div class="row">
+						<div class="col-3">
+							<p>Address</p>
+						</div>
+						<div class="col-9">
+							<p id="address">Address</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-3">
+							<p>Website</p>
+						</div>
+						<div class="col-9">
+							<a id="website" href="http://upversion.web.engr.illinois.edu/" , target="_blank">http://upversion.web.engr.illinois.edu/</a>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12">
+							<p>Top Choices</p>
+						</div>
+					</div>
+					<div class="row" id="top_dishes">
+					</div>
+					<div class="row">
+						<div id="googleMap" class="col-12" style="height:40vh;">
+							<p>Google Map</p>
+						</div>
 					</div>
 				</div>
 			</div>
