@@ -26,8 +26,6 @@ function load(data){
         var r_name = data[i]['r.name'];
         var RIN = data[i]['RIN'];
         var href_link = '/dish_detail.html?name='+d_name_url+'&RIN='+RIN;
-        console.log(href_link);
-
         var new_entry= '<div class="col-12 col-sm-4">\
                         <div class="card" style="width: 18rem; margin:10px;">\
                             <a href="'+href_link+'"><img class="card-img-top" src="' + img + '"'+
@@ -48,14 +46,13 @@ function load(data){
         top_50_dishes.append(new_entry);
     }
 }
-    
+
 $(document).ready(function(){
-    
     // Get top 50 dishes
     $.get("http://192.17.90.133:8081",{request_type:"top_50"},function(data){
-        console.log(data);
         load(data);
     });
+
     // Search button click event
     $("#search_button").click(function() {
         var search_text = $("#search_input").val();
@@ -66,61 +63,91 @@ $(document).ready(function(){
             load(data);
         });
     });
-
-    
     $('.dropdown-toggle').dropdown();
-    
     });
+</script>
 
-</script>   
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<meta name="google-signin-client_id" content="484916142950-akin6or24u1qs4vqi0g9khf2asjbhlpg.apps.googleusercontent.com">
+<script>
+function onSignIn(googleUser) {
+    var profile = googleUser.getBasicProfile();
+    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+    console.log('Name: ' + profile.getName());
+    user_name = profile.getName();
+    console.log('Image URL: ' + profile.getImageUrl());
+    user_profile = profile.getImageUrl();
+    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+
+    // user info
+    document.getElementById('username').innerHTML = user_name;
+    document.getElementById('usericon').src = user_profile
+
+    // change visibility
+    var elems = document.getElementsByClassName('usr_related');
+    for (var i = 0; i != elems.length; ++i) {
+        elems[i].style.display = "block";
+    }
+    var elem = document.getElementById('signin');
+    elem.style.display = "none";
+}
+
+function getOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function() {
+        console.log('User signed out.');
+        user_name = "";
+        user_profile = "";
+    });
+    var elems = document.getElementsByClassName('usr_related');
+    for (var i = 0; i != elems.length; ++i) {
+        elems[i].style.display = "none";
+    }
+    var elem = document.getElementById('signin');
+    elem.style.display = "block";
+}
+</script>
+
 </head>
-
 
 <body>
     <div class="containter">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="col-12 col-sm-7">
+        <nav class="navbar navbar-expand-lg navbar-light bg-fade">
+    		<div class="col-12 col-md-3">
+    			<a class="navbar-brand" href="http://upversion.web.engr.illinois.edu/">Food Quest</a>
+    		</div>
+            <div class="col-12 col-sm-6">
                 <div class="d-flex align-items-end">
                     <!-- <form class=""> -->
-                            <div class="form-group col-md-9">
+                            <div class="form-group col-md-9" style="margin:0px;">
 
-                            <input class="form-control" type="search" placeholder="Search" aria-label="Search" id="search_input">  
+                            <input class="form-control" type="search" placeholder="Search" aria-label="Search" id="search_input">
                             </div>
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-3" style="margin:0px;">
                                 <button class="btn btn-outline-success" type="submit" id="search_button">Search</button>
-                            </div>                          
-                    <!-- </form>  -->
-                </div>               
-            </div>
-
-            <div class="col-12 col-sm-5">
-                <ul class="nav d-flex flex-row-reverse">
-                    <li class="nav-item col-3 dropdown dropdown-menu-right">
-                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img src="if_grapes_2003194.png" class="img-fluid rounded" alt="Sumerinlan" style="width: 50%">
-                            </a>
-                          
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                              <a class="dropdown-item" href="#">History</a>
-                              <a class="dropdown-item" href="#">User Account</a>
-                              <a class="dropdown-item" href="#">Log out</a>
                             </div>
-
-                    </li>                    
-                    <li class="nav-item col-3">
-                        <a class="nav-link" href="#">Home</a>
-                    </li>
-                    <!-- <li class="nav-item col-3">
-                        <a class="nav-link" href="#">History</a>
-                    </li>
-                    <li class="nav-item col-3">
-                        <a class="nav-link" href="#">Log Out</a>
-                    </li>
-                    <li class="nav-item col-3">
-                        <a><img src="if_grapes_2003194.png" class="img-fluid rounded" alt="Sumerinlan" style="width: 50%"></a>
-                    </li> -->
-                </ul>
+                    <!-- </form>  -->
+                </div>
             </div>
+
+            <div class="col-12 col-md-3">
+    			<ul class="navbar-nav d-flex flex-row-reverse">
+    				<li class="nav-item" style="padding-right: 10px;">
+    					<div class="g-signin2" data-onsuccess="onSignIn" id="signin" data-width="200" data-longtitle="true"></div>
+    				</li>
+    				<li class="nav-item dropdown usr_related" style="display:none;" style="padding-right: 10px;">
+    					<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color:transparent;padding:0px;">
+    						<img src="if_grapes_2003194.png" class="img-fluid rounded" style="width:40px;height:40px" id="usericon">
+    	  				</button>
+    					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    						<a class="dropdown-header" id="username">Sumerinlan</a>
+    						<a class="dropdown-item" href="http://upversion.web.engr.illinois.edu/">Home</a>
+    						<a class="dropdown-item" href="http://upversion.web.engr.illinois.edu/user_page.html">History</a>
+    						<a class="dropdown-item" href="#" onclick="getOut();">Sign out</a>
+    					</div>
+    				</li>
+    			</ul>
+    		</div>
         </nav>
 
         <div class="container-fluid">
@@ -142,16 +169,16 @@ $(document).ready(function(){
                                     <label>Steak</label>
                             </li>
                         </ul>
-                    </div>                                  
+                    </div>
                 </div>
 
 
                 <div class="col-12 col-sm-9">
                     <div class="row" id = "top_50_dishes">
 
-                    </div>                      
+                    </div>
                 </div>
-                
+
             </div>
         </div>
 
