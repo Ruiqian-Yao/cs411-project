@@ -18,70 +18,88 @@
 
 <body>
     <div class="containter">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light d-flex flex-justify-between">
-                <div class="col-12 col-sm-7">
-                    <div class="d-flex align-items-end">
-                        <!-- <form class=""> -->
-                                <div class="form-group col-md-9">
-                                <input class="form-control" type="search" placeholder="Search" aria-label="Search" id="search_input">  
-                                </div>
-                                <div class="form-group col-md-3">
-                                    <button class="btn btn-outline-success" type="submit" id="search_button">Search</button>
-                                </div>                          
-                        <!-- </form>  -->
-                    </div>               
-                </div>
-    
-                <div class="col-12 col-sm-5">
-                    <ul class="nav d-flex flex-row-reverse">
-                        <li class="nav-item col-3 dropdown dropdown-menu-right">
-                                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <img src="if_grapes_2003194.png" class="img-fluid rounded" alt="Sumerinlan" style="width: 50%">
-                                </a>
-                                
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" href="#">History</a>
-                                    <a class="dropdown-item" href="#">User Account</a>
-                                    <a class="dropdown-item" href="#">Log out</a>
-                                </div>
-                        </li>                    
-                        <li class="nav-item col-3">
-                            <a class="nav-link" href="#">Home</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+        <nav class="navbar navbar-expand-lg navbar-light bg-fade">
+    		<div class="col-12 col-md-3">
+    			<a class="navbar-brand" href="http://upversion.web.engr.illinois.edu/">Food Quest</a>
+    		</div>
+            <div class="col-12 col-sm-6">
+                <div class="d-flex align-items-end">
+                    <!-- <form class=""> -->
+                            <div class="form-group col-md-9" style="margin:0px;">
 
-            <div class="container-fluid">
-                <div class="row" style="padding-top: 20px">
-                    <div class="card col-12 col-sm-3">
-                        <img src="if_grapes_2003194.png" class="card-img-top" alt="Sumerinlan" style="width: 100%">
-                        <div class="card-body">
-                                <h5 class="card-title">Sumerinlan</h5>
-                                <p class="card-text">I am happy to eat healthy food</p>
-                              </div>
-                    </div>
-                    <div class="col-12 col-sm-9">
-                        <div class="card">
-                            <div class="card-header">2018.03.27</div>
-                            <div class="card-body">
-                                <blockquote class="blockquote mb-0">
-                                <p>You have eatten <a style="font-size: 26px; font-weight:2em;">1310</a> calorie</p>
+                            <input class="form-control" type="search" placeholder="Search" aria-label="Search" id="search_input">
                             </div>
-                            <ul class="d-flex flex-row">
-                                <li class="list-group-item">
-                                    <img src="if_grapes_2003194.png" class="img-fluid rounded" alt="Sumerinlan" style="width: 20%">
-                                    <p>Restaurant: Perkins Restaurant & Bakery</p>
-                                </li>
-                                <li class="list-group-item">
-                                        <img src="if_grapes_2003194.png" class="img-fluid rounded" alt="Sumerinlan" style="width: 20%">
+                            <div class="form-group col-md-3" style="margin:0px;">
+                                <button class="btn btn-outline-success" type="submit" id="search_button">Search</button>
+                            </div>
+                    <!-- </form>  -->
+                </div>
+            </div>
+
+            <div class="col-12 col-md-3">
+    			<ul class="navbar-nav d-flex flex-row-reverse">
+    				<li class="nav-item" style="padding-right: 10px;">
+    					<div class="g-signin2" data-onsuccess="onSignIn" id="signin" data-width="200" data-longtitle="true"></div>
+    				</li>
+    				<li class="nav-item dropdown usr_related" style="display:none;" style="padding-right: 10px;">
+    					<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color:transparent;padding:0px;">
+    						<img src="if_grapes_2003194.png" class="img-fluid rounded" style="width:40px;height:40px" id="usericon">
+    	  				</button>
+    					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    						<a class="dropdown-header" id="username">Sumerinlan</a>
+    						<a class="dropdown-item" href="http://upversion.web.engr.illinois.edu/">Home</a>
+    						<a class="dropdown-item" href="http://upversion.web.engr.illinois.edu/user_page.html">History</a>
+    						<a class="dropdown-item" href="#" onclick="getOut();">Sign out</a>
+    					</div>
+    				</li>
+    			</ul>
+    		</div>
+        </nav>
+
+        <div class="container-fluid">
+            <div class="row" style="padding-top: 20px">
+                <div class="card col-12 col-sm-3">
+                    <img src="if_grapes_2003194.png" class="card-img-top" alt="Sumerinlan" style="width: 100%">
+                    <div class="card-body">
+                            <h5 class="card-title">Sumerinlan</h5>
+                            <p class="card-text">I am happy to eat healthy food</p>
+                            </div>
+                </div>
+                <div class="col-12 col-sm-9">
+                    <div class = "timeline">
+                        <div class= "container-history">
+                            <div class="card">
+                                <div class="card-header">2018.03.27</div>
+                                <div class="card-body">
+                                    <blockquote class="blockquote mb-0">
+                                    <p>You have eatten <a style="font-size: 26px; font-weight:2em;">1310</a> calorie</p>
+                                </div>
+                                <ul class="d-flex flex-row">
+                                    <li class="list-group-item">
+                                        <img src="food_test.jpg" class="img-fluid rounded" alt="Sumerinlan" style="width: 100%">
                                         <p>Restaurant: Perkins Restaurant & Bakery</p>
-                                </li>
-                            </ul>
+                                        <p>Calorie: 230</p>
+                                    </li>
+                                    <li class="list-group-item">
+                                            <img src="food_test.jpg" class="img-fluid rounded" alt="Sumerinlan" style="width: 100%">
+                                            <p>Restaurant: Perkins Restaurant & Bakery</p>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <img src="food_test.jpg" class="img-fluid rounded" alt="Sumerinlan" style="width: 100%">
+                                        <p>Restaurant: Perkins Restaurant & Bakery</p>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <img src="food_test.jpg" class="img-fluid rounded" alt="Sumerinlan" style="width: 100%">
+                                        <p>Restaurant: Perkins Restaurant & Bakery</p>
+                                    </li>
+                                </ul>
+                            </div>                            
                         </div>
                     </div>
-                </div>                
-            </div>
+
+                </div>
+            </div>                
+        </div>
 
 
     </div>
