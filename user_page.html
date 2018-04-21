@@ -52,7 +52,50 @@
 				request_type: 'get_user_history',
 				user_name: user_name,
 			}, function(data) {
-                console.log(data);
+                var user_history = $("#user_history");
+                for(var i=0; i<data.length; i++){
+                    var record = data[i];
+                    // get date
+                    var date = record['date'];
+                    // get total calorie
+                    var total_calorie = String(record['total_calorie']);
+                    if (total_calorie == "null"){
+                        total_calorie = "(no data)";
+                    }
+                    // get dishes_names
+                    var dish_names = record['dish_names'].split('|');
+                    // get dish images
+                    var dish_images = record['dish_images'].split('|');
+                    // get comments
+                    var comments = record['comments'].split('|');
+                    
+                    // the new entry about to be added
+                    var new_entry = 
+                            '<div class="card">\
+                            <div class="card-header"><a class="item-name">'+date+'</a></div>\
+                                <li class="list-group-item"><p class="top-header">You ate <a class="item-name">'+total_calorie+'</a> calories!</p></li>\
+                                <ul class="d-flex flex-row">';
+                    for (var j=0; j<dish_names.length; j++){
+                        if (j%3 == 0 && j!=0){
+                            new_entry = new_entry + '</ul><ul class="d-flex flex-row">'
+                        }
+                        var list_entry = 
+                                    '<li class="list-group-item col-4">\
+                                            <img src="'+dish_images[j]+'" class="img-fluid rounded" alt="Sumerinlan" style="width: 100%">\
+                                            <p><a class="item-name">Restaurant </a> Perkins Restaurant & Bakery</p>\
+                                            <div class="dropdown-divider"></div>\
+                                            <p><a class="item-name">Calorie </a>  1200</p>\
+                                            <div class="dropdown-divider"></div>\
+                                            <a class="item-name">Comments </a>\
+                                            <p>'+comments[j]+'</p>\
+                                    </li>';
+                        new_entry = new_entry + list_entry;
+                    }
+                    new_entry = new_entry + '</ul></div>';
+                    
+                    // Append the new card to user history
+                    user_history.append(new_entry);
+                }
             });
 		}
 
@@ -113,7 +156,7 @@
                 </div> -->
                 <div class="col-12 col-sm-12">
                     <div class = "timeline">
-                        <div class= "container-history">
+                        <div class= "container-history" id="user_history">
                             <div class="card">
                                 <div class="card-header"><a class="item-name">2018.03.27</a></div>
                                 <!-- <div class="card-body">
