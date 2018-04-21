@@ -52,6 +52,9 @@
 				request_type: 'get_user_history',
 				user_name: user_name,
 			}, function(data) {
+                
+                console.log(data);
+                return;
                 var user_history = $("#user_history");
                 for(var i=0; i<data.length; i++){
                     var record = data[i];
@@ -67,7 +70,11 @@
                     // get dish images
                     var dish_images = record['dish_images'].split('|');
                     // get comments
-                    var comments = record['comments'].split('|');
+//                    var comments = record['comments'].split('|');
+                    // get restaurant names
+                    var restaurant_names = record['restaurant_names'].split('|');
+                    // get individual calorie
+//                    var calories = record['calories'].split('|');
                     
                     // the new entry about to be added
                     var new_entry = 
@@ -82,9 +89,9 @@
                         var list_entry = 
                                     '<li class="list-group-item col-4">\
                                             <img src="'+dish_images[j]+'" class="img-fluid rounded" alt="Sumerinlan" style="width: 100%">\
-                                            <p><a class="item-name">Restaurant </a> Perkins Restaurant & Bakery</p>\
+                                            <p><a class="item-name">Restaurant </a> '+restaurant_names[j]+' </p>\
                                             <div class="dropdown-divider"></div>\
-                                            <p><a class="item-name">Calorie </a>  1200</p>\
+                                            <p><a class="item-name">Calorie </a>  '+'hello'+'</p>\
                                             <div class="dropdown-divider"></div>\
                                             <a class="item-name">Comments </a>\
                                             <p>'+comments[j]+'</p>\
