@@ -112,7 +112,7 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
         # Query user history
         if(params['request_type'][0] == 'get_user_history'):
             user_name = params['user_name'][0]
-            cmd = "SELECT GROUP_CONCAT(Dish.name SEPARATOR ',') AS dish_names, GROUP_CONCAT(Dish.img SEPARATOR '|||') AS dish_images, GROUP_CONCAT (History.comment SEPARATOR '|||'), cast(SUM(Dish.calorie) AS UNSIGNED) AS total_calorie, History.User AS user, DATE_FORMAT(History.date, '%%d-%%m-%%Y') AS date FROM Dish, History WHERE History.DIN = Dish.DIN AND History.User = %s DROUP BY History.date ORDER BY History.date"
+            cmd = "SELECT GROUP_CONCAT(Dish.name SEPARATOR '|') AS dish_names, GROUP_CONCAT(Dish.img SEPARATOR '|') AS dish_images, GROUP_CONCAT (History.comment SEPARATOR '|||'), cast(SUM(Dish.calorie) AS UNSIGNED) AS total_calorie, History.User AS user, DATE_FORMAT(History.date, '%%d-%%m-%%Y') AS date FROM Dish, History WHERE History.DIN = Dish.DIN AND History.User = %s DROUP BY History.date ORDER BY History.date"
             cur.execute(cmd, user_name)
             data_from_db = cur.fetchall()
             self.wfile.write(bytes(json.dumps(data_from_db),"utf8"))
