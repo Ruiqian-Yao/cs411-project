@@ -54,7 +54,6 @@
 			}, function(data) {
                 
                 console.log(data);
-                return;
                 var user_history = $("#user_history");
                 for(var i=0; i<data.length; i++){
                     var record = data[i];
@@ -70,11 +69,11 @@
                     // get dish images
                     var dish_images = record['dish_images'].split('|');
                     // get comments
-//                    var comments = record['comments'].split('|');
+                    var comments = record['comments'].split('|');
                     // get restaurant names
                     var restaurant_names = record['restaurant_names'].split('|');
                     // get individual calorie
-//                    var calories = record['calories'].split('|');
+                    var calories = record['calories'].split('|');
                     
                     // the new entry about to be added
                     var new_entry = 
@@ -89,9 +88,10 @@
                         var list_entry = 
                                     '<li class="list-group-item col-4">\
                                             <img src="'+dish_images[j]+'" class="img-fluid rounded" alt="Sumerinlan" style="width: 100%">\
+                                            <p>'+dish_names[j]+' </p>\
                                             <p><a class="item-name">Restaurant </a> '+restaurant_names[j]+' </p>\
                                             <div class="dropdown-divider"></div>\
-                                            <p><a class="item-name">Calorie </a>  '+'hello'+'</p>\
+                                            <p><a class="item-name">Calorie </a>  '+calories[j]+'</p>\
                                             <div class="dropdown-divider"></div>\
                                             <a class="item-name">Comments </a>\
                                             <p>'+comments[j]+'</p>\
@@ -129,7 +129,7 @@
     <div class="containter">
         <nav class="navbar navbar-expand-lg navbar-light bg-fade">
       <div class="col-12 col-md-3">
-       <a class="navbar-brand" href=" ">Food Quest</a >
+       <a class="navbar-brand" href="http://upversion.web.engr.illinois.edu/">Food Quest</a>
       </div>
             
     <div class="col-12 col-md-3">
@@ -164,11 +164,12 @@
                 <div class="col-12 col-sm-12">
                     <div class = "timeline">
                         <div class= "container-history" id="user_history">
+<!--
                             <div class="card">
                                 <div class="card-header"><a class="item-name">2018.03.27</a></div>
-                                <!-- <div class="card-body">
+                                 <div class="card-body">
                                     <p>You have eatten <a style="font-size: 26px; font-weight:2em;">1310</a> calorie</p>
-                                </div> -->
+                                </div> 
                                 <li class="list-group-item"><p class="top-header">You ate <a class="item-name">1230</a> calories!</p></li>
                                 <ul class="d-flex flex-row">
                                     <li class="list-group-item">
@@ -200,6 +201,7 @@
                                     </li>
                                 </ul>
                             </div>  
+-->
                         </div>
                         
                     </div>
