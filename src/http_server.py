@@ -116,7 +116,7 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
                     GROUP_CONCAT(Dish.img SEPARATOR '|') AS dish_images,
                     GROUP_CONCAT(History.comment SEPARATOR '|') AS comments,
                     GROUP_CONCAT(Dish.restaurant SEPARATOR '|') AS restaurant_names,
-                    GROUP_CONCAT(IF(Dish.calorie is NULL '(no data)' CAST(Dish.calorie AS CHAR(10))) SEPARATOR '|') AS calories,
+                    GROUP_CONCAT(IF(Dish.calorie is NULL, '(no data)', CAST(Dish.calorie AS CHAR(10))) SEPARATOR '|') AS calories,
                     cast(SUM(Dish.calorie) AS UNSIGNED) AS total_calorie,
                     History.User AS user,
                     DATE_FORMAT(History.date, '%%d-%%m-%%Y') AS date
