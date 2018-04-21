@@ -155,6 +155,10 @@
  color: #fefefe;
 }
 
+#img {
+	background-size: 100%;
+}
+
 /*Google sign in*/
 
 /*seem to be useless ...*/
