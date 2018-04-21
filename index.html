@@ -63,25 +63,25 @@ $(document).ready(function(){
             load(data);
         });
     });
-    
+
     // Trending filter selected
-    $(":checkbox").click(function(event){
-        // If the check box is already checked
+    $(":radio").click(function(event){
+        // If the radio is already checked
         if (event.target.checked == false){
             $.get("http://192.17.90.133:8081",{request_type:"top_50"},function(data){
             load(data);});
             return;
         }
-        
-        // If the check box has not yet been checked
-        // Reset all other check boxes
-        $(":checkbox").prop('checked', false);
+
+        // If the radio has not yet been checked
+        // Reset all other radios
+        $(":radio").prop('checked', false);
         event.target.checked = true;
         var trending  = event.target.value;
         $.get("http://192.17.90.133:8081",{request_type:"search", keyword:trending},function(data){
             load(data);});
         });
-    
+
     $('.dropdown-toggle').dropdown();
     });
 </script>
@@ -176,29 +176,28 @@ function getOut() {
                         <div class="card-header">Trending</div>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
-                                <input type="checkbox" value="steak">
+                                <input type="radio" value="steak">
                                 <label>Steak</label>
                             </li>
                             <li class="list-group-item">
-                                    <input type="checkbox" value="sandwich">
+                                    <input type="radio" value="sandwich">
                                     <label>Sandwich</label>
                             </li>
                             <li class="list-group-item">
-                                    <input type="checkbox" value="dessert">
+                                    <input type="radio" value="dessert">
                                     <label>Dessert</label>
                             </li>
                             <li class="list-group-item">
-                                    <input type="checkbox" value="soup">
+                                    <input type="radio" value="soup">
                                     <label>Soup</label>
                             </li>
                             <li class="list-group-item">
-                                    <input type="checkbox" value="chicken">
+                                    <input type="radio" value="chicken">
                                     <label>Chicken</label>
                             </li>
                         </ul>
-                    </div> 
+                    </div>
                 </div>
-
 
                 <div class="col-12 col-sm-9">
                     <div class="row" id = "top_50_dishes">
