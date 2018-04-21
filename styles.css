@@ -164,3 +164,46 @@
 	-webkit-box-shadow: none;
 	box-shadow: none;
 }
+
+/*user page*/
+.timeline {
+    position: relative;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+/* The actual timeline (the vertical ruler) */
+.timeline::after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    background-color: gray;
+    top: 0;
+    bottom: 0;
+	left: 5%;
+    margin-left: -3px;
+}
+
+/* Container around content */
+.container-history{
+	/* padding: 10px 40px; */
+	padding-left: 60px;
+    padding-top: 60px;
+    position: relative;
+    background-color: inherit;
+    width: 100%;
+}
+
+/* The circles on the timeline */
+.container-history::after {
+    content: '';
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    right: -17px;
+    background-color:#FF9F55;
+	top: 15px;
+	left:3.5%;
+    border-radius: 50%;
+    z-index: 1;
+}
