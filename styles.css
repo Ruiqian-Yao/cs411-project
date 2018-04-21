@@ -169,7 +169,7 @@
 .timeline {
     position: relative;
     max-width: 100%;
-    margin: 0 auto;
+	margin: 0 auto;
 }
 
 /* The actual timeline (the vertical ruler) */
@@ -180,7 +180,7 @@
     background-color: gray;
     top: 0;
     bottom: 0;
- left: 5%;
+ 	left: 5%;
     margin-left: -3px;
 }
 
@@ -191,7 +191,7 @@
     padding-top: 20px;
     position: relative;
     background-color: inherit;
-    width: 100%;
+    width: 97%;
 }
 
 /* The circles on the timeline */
@@ -202,7 +202,7 @@
     height: 25px;
     right: -17px;
 	background-color:#FF9F55;
-	top: 15px;
+	top: 6%;
 	left:4%;
     border-radius: 50%;
     z-index: 1;
@@ -216,8 +216,17 @@
 	color: None;
 } */
 
-#a, .item-name {
-	color: #FF9F55;
+.item-name {
+	color: #FF9F55 !important;
+	font-weight: 600;
+	font-size: 20px
+}
+
+.top-header {
+	margin-left: 40px;
+	font-weight: 600;
+	font-size: 20px;
+	
 }
 
 /*sticky*/
@@ -227,3 +236,5 @@
 	top: 20px;
 	z-index: 1000;
 }
+
+
