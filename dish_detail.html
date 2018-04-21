@@ -41,7 +41,7 @@
 				//console.log(dish);
 				$("#dish_name").text(dish['name']);
 				$("#dish_category").text(dish['category']);
-				$("#dish_score").text(dish['score']);
+				$("#dish_likes").text(dish['num_like']);
 				if (dish['price'] != null) {
 					$("#price").text(dish['price']);
 				}
@@ -161,6 +161,26 @@
 			$('.btn-like')
 				.bind('click', function(event) {
 					$(".btn-like").toggleClass("liked");
+                    // Get the old likes
+                    var num_likes = parseInt($("#dish_likes").text());
+                    // Update the score 
+                    if($(".btn-like").hasClass('liked')){
+                        // If the user clicked like
+                        $.get("http://192.17.90.133:8081", {
+				        request_type: 'like_dish',
+				        name: params['name'],
+				        RIN: params['RIN']
+			             }, function(data) {});
+                        $("#dish_likes").text(num_likes+1);
+                    }else{
+                        // If the user cancelled like
+                        $.get("http://192.17.90.133:8081", {
+				        request_type: 'cancel_like_dish',
+				        name: params['name'],
+				        RIN: params['RIN']
+			             }, function(data) {});
+                        $("#dish_likes").text(num_likes-1);
+                    }
 				})
 		});
 	</script>
@@ -248,7 +268,7 @@
 					<div class="d-flex justify-content-end">
 						<div style="padding:10px;">
 							<button type="button" class="btn btn-like" style="padding: 2px 5px;">
-								<i class="material-icons">favorite_border</i> <span id="dish_score"></span>
+								<i class="material-icons">favorite_border</i> <span id="dish_likes"></span>
 							</button>
 						</div>
 						<div style="padding:10px;">
