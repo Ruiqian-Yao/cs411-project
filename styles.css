@@ -1,168 +1,168 @@
 * {
-	-ms-font-family: "Avenir Next";
-	-moz-font-family: "Avenir Next";
-	-webkit-font-family: "Avenir Next";
-	font-family: "Avenir Next";
+ -ms-font-family: "Avenir Next";
+ -moz-font-family: "Avenir Next";
+ -webkit-font-family: "Avenir Next";
+ font-family: "Avenir Next";
 
-	-ms-font-weight: normal;
-	-moz-font-weight: normal;
-	-webkit-font-weight: normal;
-	font-weight: normal;
+ -ms-font-weight: normal;
+ -moz-font-weight: normal;
+ -webkit-font-weight: normal;
+ font-weight: normal;
 }
 
 .display-1 {
-	-ms-font-weight: lighter;
-	-moz-font-weight: lighter;
-	-webkit-font-weight: lighter;
-	font-weight: lighter;
+ -ms-font-weight: lighter;
+ -moz-font-weight: lighter;
+ -webkit-font-weight: lighter;
+ font-weight: lighter;
 
-	-ms-font-size: 48px;
-	-moz-font-size: 48px;
-	-webkit-font-size: 48px;
-	font-size: 48px;
+ -ms-font-size: 48px;
+ -moz-font-size: 48px;
+ -webkit-font-size: 48px;
+ font-size: 48px;
 }
 
 .display-2 {
-	-ms-font-size: 24px;
-	-moz-font-size: 24px;
-	-webkit-font-size: 24px;
-	font-size: 24px;
+ -ms-font-size: 24px;
+ -moz-font-size: 24px;
+ -webkit-font-size: 24px;
+ font-size: 24px;
 }
 
 .display-3 {
-	-ms-font-size: 24px;
-	-moz-font-size: 24px;
-	-webkit-font-size: 24px;
-	font-size: 24px;
+ -ms-font-size: 24px;
+ -moz-font-size: 24px;
+ -webkit-font-size: 24px;
+ font-size: 24px;
 }
 
 /*Dropdown*/
 
 .dropdown-menu {
-	-ms-min-width: 0px !important;
-	-moz-min-width: 0px !important;
-	-webkit-min-width: 0px !important;
-	min-width: 0px !important;
+ -ms-min-width: 0px !important;
+ -moz-min-width: 0px !important;
+ -webkit-min-width: 0px !important;
+ min-width: 0px !important;
 
-	-ms-font-size: .9em;
-	-moz-font-size: .9em;
-	-webkit-font-size: .9em;
-	font-size: .9em;
+ -ms-font-size: .9em;
+ -moz-font-size: .9em;
+ -webkit-font-size: .9em;
+ font-size: .9em;
 }
 
 .dropdown-header {
-	-ms-font-weight: 500;
-	-moz-font-weight: 500;
-	-webkit-font-weight: 500;
-	font-weight: 500;
+ -ms-font-weight: 500;
+ -moz-font-weight: 500;
+ -webkit-font-weight: 500;
+ font-weight: 500;
 }
 
 .dropdown-header, .dropdown-item {
-	-ms-padding: 5px 10px;
-	-moz-padding: 5px 10px;
-	-webkit-padding: 5px 10px;
-	padding: 5px 10px;
+ -ms-padding: 5px 10px;
+ -moz-padding: 5px 10px;
+ -webkit-padding: 5px 10px;
+ padding: 5px 10px;
 
-	-ms-margin: 0px;
-	-moz-margin: 0px;
-	-webkit-margin: 0px;
-	margin: 0px;
+ -ms-margin: 0px;
+ -moz-margin: 0px;
+ -webkit-margin: 0px;
+ margin: 0px;
 }
 
 /*Like*/
 
 .btn-like {
-	-ms-background: transparent;
-	-moz-background: transparent;
-	-webkit-background: transparent;
-	background: transparent;
+ -ms-background: transparent;
+ -moz-background: transparent;
+ -webkit-background: transparent;
+ background: transparent;
 }
 
 .btn-like .material-icons, .btn-like span {
-	-ms-transition: all ease 0.4s;
-	-moz-transition: all ease 0.4s;
-	-webkit-transition: all ease 0.4s;
-	transition: all ease 0.4s;
+ -ms-transition: all ease 0.4s;
+ -moz-transition: all ease 0.4s;
+ -webkit-transition: all ease 0.4s;
+ transition: all ease 0.4s;
 }
 
 .btn-like:focus {
-	-ms-background-color: transparent;
-	-moz-background-color: transparent;
-	-webkit-background-color: transparent;
-	background-color: transparent;
+ -ms-background-color: transparent;
+ -moz-background-color: transparent;
+ -webkit-background-color: transparent;
+ background-color: transparent;
 }
 
 .btn-like:focus .material-icons, .btn-like:focus span {
-	-ms-color: #cc4b37;
-	-moz-color: #cc4b37;
-	-webkit-color: #cc4b37;
-	color: #cc4b37;
+ -ms-color: #cc4b37;
+ -moz-color: #cc4b37;
+ -webkit-color: #cc4b37;
+ color: #cc4b37;
 }
 
 .btn-like:hover {
-	-ms-background-color: transparent;
-	-moz-background-color: transparent;
-	-webkit-background-color: transparent;
-	background-color: transparent;
+ -ms-background-color: transparent;
+ -moz-background-color: transparent;
+ -webkit-background-color: transparent;
+ background-color: transparent;
 }
 
 .btn-like:hover .material-icons, .btn-like:hover span {
-	-ms-color: #cc4b37;
-	-moz-color: #cc4b37;
-	-webkit-color: #cc4b37;
-	color: #cc4b37;
+ -ms-color: #cc4b37;
+ -moz-color: #cc4b37;
+ -webkit-color: #cc4b37;
+ color: #cc4b37;
 }
 
 .liked {
-	-ms-background-color: #cc4b37;
-	-moz-background-color: #cc4b37;
-	-webkit-background-color: #cc4b37;
-	background-color: #cc4b37;
+ -ms-background-color: #cc4b37;
+ -moz-background-color: #cc4b37;
+ -webkit-background-color: #cc4b37;
+ background-color: #cc4b37;
 }
 
 .liked .material-icons, .liked span {
-	-ms-color: #fefefe;
-	-moz-color: #fefefe;
-	-webkit-color: #fefefe;
-	color: #fefefe;
+ -ms-color: #fefefe;
+ -moz-color: #fefefe;
+ -webkit-color: #fefefe;
+ color: #fefefe;
 }
 
 .liked:focus {
-	-ms-background-color: #cc4b37;
-	-moz-background-color: #cc4b37;
-	-webkit-background-color: #cc4b37;
-	background-color: #cc4b37;
+ -ms-background-color: #cc4b37;
+ -moz-background-color: #cc4b37;
+ -webkit-background-color: #cc4b37;
+ background-color: #cc4b37;
 }
 
 .liked:focus .material-icons, .liked:focus span {
-	-ms-color: #fefefe;
-	-moz-color: #fefefe;
-	-webkit-color: #fefefe;
-	color: #fefefe;
+ -ms-color: #fefefe;
+ -moz-color: #fefefe;
+ -webkit-color: #fefefe;
+ color: #fefefe;
 }
 
 .liked:hover {
-	-ms-background-color: #cc4b37;
-	-moz-background-color: #cc4b37;
-	-webkit-background-color: #cc4b37;
-	background-color: #cc4b37;
+ -ms-background-color: #cc4b37;
+ -moz-background-color: #cc4b37;
+ -webkit-background-color: #cc4b37;
+ background-color: #cc4b37;
 }
 
 .liked:hover .material-icons, .liked:hover span {
-	-ms-color: #fefefe;
-	-moz-color: #fefefe;
-	-webkit-color: #fefefe;
-	color: #fefefe;
+ -ms-color: #fefefe;
+ -moz-color: #fefefe;
+ -webkit-color: #fefefe;
+ color: #fefefe;
 }
 
 /*Google sign in*/
 
 /*seem to be useless ...*/
 .g-signin2 {
-	-ms-box-shadow: none;
-	-moz-box-shadow: none;
-	-webkit-box-shadow: none;
-	box-shadow: none;
+ -ms-box-shadow: none;
+ -moz-box-shadow: none;
+ -webkit-box-shadow: none;
+ box-shadow: none;
 }
 
 /*user page*/
@@ -180,15 +180,15 @@
     background-color: gray;
     top: 0;
     bottom: 0;
-	left: 5%;
+ left: 5%;
     margin-left: -3px;
 }
 
 /* Container around content */
 .container-history{
-	/* padding: 10px 40px; */
-	padding-left: 60px;
-    padding-top: 60px;
+ /* padding: 10px 40px; */
+ padding-left: 80px;
+    padding-top: 20px;
     position: relative;
     background-color: inherit;
     width: 100%;
@@ -202,8 +202,16 @@
     height: 25px;
     right: -17px;
     background-color:#FF9F55;
-	top: 15px;
-	left:3.5%;
+ top: 15px;
+ left:4%;
     border-radius: 50%;
     z-index: 1;
+}
+
+.list-group-item {
+ border: None;
+}
+
+.list-group-item .item-name {
+ color:#FF9F55; 
 }
