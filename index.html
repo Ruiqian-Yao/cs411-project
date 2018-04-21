@@ -15,8 +15,8 @@
 <script>
 function load(data){
     // delete the existing dish entries
-    var top_50_dishes = $("#top_50_dishes");
-    top_50_dishes.empty();
+    var top_51_dishes = $("#top_51_dishes");
+    top_51_dishes.empty();
     // Add new dish entries
     for(var i=0;i<data.length;i++){
         var d_name = data[i]['name'];
@@ -43,13 +43,13 @@ function load(data){
                             </div>\
                         </div>\
                         </div>';
-        top_50_dishes.append(new_entry);
+        top_51_dishes.append(new_entry);
     }
 }
 
 $(document).ready(function(){
     // Get top 50 dishes
-    $.get("http://192.17.90.133:8081",{request_type:"top_50"},function(data){
+    $.get("http://192.17.90.133:8081",{request_type:"top_51"},function(data){
         load(data);
     });
 
@@ -68,7 +68,7 @@ $(document).ready(function(){
     $(":radio").click(function(event){
         // If the radio is already checked
         if (event.target.checked == false){
-            $.get("http://192.17.90.133:8081",{request_type:"top_50"},function(data){
+            $.get("http://192.17.90.133:8081",{request_type:"top_51"},function(data){
             load(data);});
             return;
         }
@@ -200,7 +200,7 @@ function getOut() {
                 </div>
 
                 <div class="col-12 col-sm-9">
-                    <div class="row" id = "top_50_dishes">
+                    <div class="row" id = "top_51_dishes">
 
                     </div>
                 </div>
