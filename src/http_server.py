@@ -83,7 +83,7 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
 
         # Get top 50 dishes
         if(params['request_type'][0] == 'top_50'):
-            cmd = 'SELECT d.name, d.img, d.score, r.name, r.RIN FROM Dish d, Restaurant r WHERE d.RIN = r.RIN ORDER BY d.score desc LIMIT 50;'
+            cmd = 'SELECT d.name, d.img, d.num_like, r.name, r.RIN FROM Dish d, Restaurant r WHERE d.RIN = r.RIN ORDER BY d.score desc LIMIT 50;'
             cur.execute(cmd)
             data_from_db = cur.fetchall()
             self.wfile.write(bytes(json.dumps(data_from_db),"utf8"))

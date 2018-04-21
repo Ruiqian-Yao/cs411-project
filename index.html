@@ -22,7 +22,7 @@ function load(data){
         var d_name = data[i]['name'];
         var d_name_url = encodeURIComponent(d_name);
         var img = data[i]['img'];
-        var score = data[i]['score'];
+        var num_like = data[i]['num_like'];
         var r_name = data[i]['r.name'];
         var RIN = data[i]['RIN'];
         var href_link = '/dish_detail.html?name='+d_name_url+'&RIN='+RIN;
@@ -33,7 +33,7 @@ function load(data){
                             <div class="card-body">\
                                 <h5 class="card-title">'+d_name+'</h5>\
                                 <div class="d-inline-flex">\
-                                    <p>'+score+'</p>\
+                                    <p>'+num_like+'</p>\
                                     <i class="material-icons">favorite</i>\
                                 </div>\
                                 <div class="row">\
