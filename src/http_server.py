@@ -48,6 +48,30 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
             self.wfile.write(bytes(json.dumps(data_from_db), "utf8"))
             return
 
+        # Like button
+        if(params['request_type'][0] == 'like_dish'):
+            name = params['name'][0]
+            RIN = params['RIN'][0]
+            cmd = 'UPDATE Dish SET num_like = num_like + 1, score = score + 10 WHERE name = %s AND RIN = %s'
+            cur.execute(cmd, [name, RIN])
+            db.commit()
+            message = json.dumps({'Status': 'OK', 'Message': 'SUCCEED'})
+            # Write content as utf-8 data
+            self.wfile.write(bytes(message, "utf8"))
+            return
+
+        # Cancel button
+        if(params['request_type'][0] == 'cancel_like_dish'):
+            name = params['name'][0]
+            RIN = params['RIN'][0]
+            cmd = 'UPDATE Dish SET num_like = num_like - 1, score = score - 10 WHERE name = %s AND RIN = %s'
+            cur.execute(cmd, [name, RIN])
+            db.commit()
+            message = json.dumps({'Status': 'OK', 'Message': 'SUCCEED'})
+            # Write content as utf-8 data
+            self.wfile.write(bytes(message, "utf8"))
+            return
+
         # Get top dishes of this restaurant
         if(params['request_type'][0] == 'top_dishes'):
             RIN = params['RIN'][0]
@@ -58,8 +82,8 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
             return
 
         # Get top 50 dishes
-        if(params['request_type'][0] == 'top_50'):
-            cmd = 'SELECT d.name, d.img, d.score, r.name, r.RIN FROM Dish d, Restaurant r WHERE d.RIN = r.RIN ORDER BY d.score desc LIMIT 50;'
+        if(params['request_type'][0] == 'top_51'):
+            cmd = 'SELECT d.name, d.img, d.num_like, r.name, r.RIN FROM Dish d, Restaurant r WHERE d.RIN = r.RIN ORDER BY d.score desc LIMIT 51;'
             cur.execute(cmd)
             data_from_db = cur.fetchall()
             self.wfile.write(bytes(json.dumps(data_from_db),"utf8"))
