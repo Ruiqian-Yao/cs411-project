@@ -81,7 +81,7 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
             self.wfile.write(bytes(json.dumps(data_from_db), "utf8"))
             return
 
-        # Get top 50 dishes
+        # Get top 51 dishes
         if(params['request_type'][0] == 'top_51'):
             cmd = 'SELECT d.name, d.img, d.num_like, r.name, r.RIN FROM Dish d, Restaurant r WHERE d.RIN = r.RIN ORDER BY d.score desc LIMIT 51;'
             cur.execute(cmd)
@@ -105,9 +105,17 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
             cmd = 'DELETE FROM Dish WHERE name = %s AND RIN = %s';
             cur.execute(cmd, [name, RIN])
             data_from_db = cur.fetchall()
-            print(data_from_db)
             db.commit()
             self.wfile.write(bytes(json.dumps({'Status': 'OK'}),"utf8"))
+            return
+
+        # Query user history
+        if(params['request_type'][0] == 'get_user_history'):
+            user_name = params['user_name'][0]
+            cmd = "SELECT GROUP_CONCAT(Dish.name SEPARATOR ',') as dish_names, GROUP_CONCAT(Dish.img SEPARATOR ',') as dish_images, SUM(Dish.calorie) as total_calorie, History.User as user, History.date as date from Dish, History where History.DIN = Dish.DIN AND History.User = %s group by History.date ORDER BY History.date"
+            cur.execute(cmd, user_name)
+            data_from_db = cur.fetchall()
+            self.wfile.write(bytes(json.dumps(data_from_db),"utf8"))
             return
 
 

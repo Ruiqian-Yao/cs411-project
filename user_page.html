@@ -13,6 +13,65 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
+    
+    
+<script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+<meta name="google-signin-client_id" content="484916142950-akin6or24u1qs4vqi0g9khf2asjbhlpg.apps.googleusercontent.com">
+<script>
+    var user_name = "";
+    var user_profile = "";
+</script>>
+<script>
+		function init() {
+			gapi.load('auth2', function() {});
+		}
+
+		function onSignIn(googleUser) {
+			var profile = googleUser.getBasicProfile();
+			console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+			console.log('Name: ' + profile.getName());
+			user_name = profile.getName();
+			console.log('Image URL: ' + profile.getImageUrl());
+			user_profile = profile.getImageUrl();
+			console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+
+			// user info
+			document.getElementById('username').innerHTML = user_name;
+			document.getElementById('usericon').src = user_profile
+
+			// change visibility
+			var elems = document.getElementsByClassName('usr_related');
+			for (var i = 0; i != elems.length; ++i) {
+				elems[i].style.display = "block";
+			}
+			var elem = document.getElementById('signin');
+			elem.style.display = "none";
+            
+            // Query for user histor
+			$.get("http://192.17.90.133:8081", {
+				request_type: 'get_user_history',
+				user_name: user_name,
+			}, function(data) {
+                console.log(data);
+            });
+		}
+
+		function getOut() {
+			var auth2 = gapi.auth2.getAuthInstance();
+			auth2.signOut().then(function() {
+				console.log('User signed out.');
+				user_name = "";
+				user_profile = "";
+			});
+			var elems = document.getElementsByClassName('usr_related');
+			for (var i = 0; i != elems.length; ++i) {
+				elems[i].style.display = "none";
+			}
+			var elem = document.getElementById('signin');
+			elem.style.display = "block";
+		}
+	</script>
+    
 </head>
 
 
@@ -22,21 +81,8 @@
       <div class="col-12 col-md-3">
        <a class="navbar-brand" href=" ">Food Quest</a >
       </div>
-            <div class="col-12 col-sm-6">
-                <div class="d-flex align-items-end">
-                    <!-- <form class=""> -->
-                            <div class="form-group col-md-9" style="margin:0px;">
-
-                            <input class="form-control" type="search" placeholder="Search" aria-label="Search" id="search_input">
-                            </div>
-                            <div class="form-group col-md-3" style="margin:0px;">
-                                <button class="btn btn-outline-success" type="submit" id="search_button">Search</button>
-                            </div>
-                    <!-- </form>  -->
-                </div>
-            </div>
-
-            <div class="col-12 col-md-3">
+            
+    <div class="col-12 col-md-3">
        <ul class="navbar-nav d-flex flex-row-reverse">
         <li class="nav-item" style="padding-right: 10px;">
          <div class="g-signin2" data-onsuccess="onSignIn" id="signin" data-width="200" data-longtitle="true"></div>
@@ -103,7 +149,7 @@
                                             <p>I like to take this dish because</p>
                                     </li>
                                 </ul>
-                            </div>                            
+                            </div>  
                         </div>
                         
                     </div>
