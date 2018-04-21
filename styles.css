@@ -187,8 +187,8 @@
 /* Container around content */
 .container-history{
 	/* padding: 10px 40px; */
-	padding-left: 60px;
-    padding-top: 60px;
+	padding-left: 80px;
+    padding-top: 20px;
     position: relative;
     background-color: inherit;
     width: 100%;
@@ -203,7 +203,15 @@
     right: -17px;
     background-color:#FF9F55;
 	top: 15px;
-	left:3.5%;
+	left:4%;
     border-radius: 50%;
     z-index: 1;
+}
+
+.list-group-item {
+	border: None;
+}
+
+.list-group-item .item-name {
+	color:#FF9F55; 
 }
