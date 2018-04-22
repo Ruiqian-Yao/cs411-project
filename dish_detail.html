@@ -219,12 +219,11 @@
 			var elem = document.getElementById('signin');
 			elem.style.display = "none";
 			// delete button
-			var dlt = document.getElementById('delete-pre');
-			if (profile.getId() = "115664341675525061502") {
+			var dlt = document.getElementById('deletepre');
+			if (profile.getId() == "103314533233523888274") {
 				dlt.style.display = "block";
-			}
-			else {
-				dlt.style.display = "block";
+			} else {
+				dlt.style.display = "none";
 			}
 		}
 
@@ -242,7 +241,7 @@
 			var elem = document.getElementById('signin');
 			elem.style.display = "block";
 			// delete button
-			var dlt = document.getElementById('delete-pre');
+			var dlt = document.getElementById('deletepre');
 			dlt.style.display = "none";
 		}
 	</script>
@@ -288,7 +287,7 @@
 								<i class="material-icons">favorite_border</i> <span id="dish_likes"></span>
 							</button>
 						</div>
-						<div style="padding:10px;" id="delete-pre" style="display:none;">
+						<div style="padding:10px;display:none;" id="deletepre">
 							<button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#deleteModal">Delete this dish</button>
 							<div class="modal fade" id="deleteModal" role="dialog">
 								<div class="modal-dialog">
