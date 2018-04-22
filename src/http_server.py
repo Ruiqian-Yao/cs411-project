@@ -119,8 +119,8 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
                     GROUP_CONCAT(IF(Dish.calorie is NULL, '(no data)', CAST(Dish.calorie AS CHAR(10))) SEPARATOR '|') AS calories,
                     cast(SUM(Dish.calorie) AS UNSIGNED) AS total_calorie,
                     History.User AS user,
-                    DATE_FORMAT(History.date, '%%d-%%m-%%Y') AS date
-                    FROM Dish, History WHERE History.DIN = Dish.DIN AND History.User = %s GROUP BY History.date ORDER BY History.date'''
+                    DATE_FORMAT(History.date, '%%m-%%d-%%Y') AS date
+                    FROM Dish, History WHERE History.DIN = Dish.DIN AND History.User = %s GROUP BY History.date ORDER BY History.date desc'''
             cur.execute(cmd, user_name)
             data_from_db = cur.fetchall()
             self.wfile.write(bytes(json.dumps(data_from_db),"utf8"))
