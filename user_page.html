@@ -9,19 +9,19 @@
 
 
 <head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-    
-    
-<script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
-<meta name="google-signin-client_id" content="484916142950-akin6or24u1qs4vqi0g9khf2asjbhlpg.apps.googleusercontent.com">
-<script>
-    var user_name = "";
-    var user_profile = "";
-</script>
-<script>
+
+
+	<script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+	<meta name="google-signin-client_id" content="484916142950-akin6or24u1qs4vqi0g9khf2asjbhlpg.apps.googleusercontent.com">
+	<script>
+		var user_name = "";
+		var user_profile = "";
+	</script>
+	<script>
 		function init() {
 			gapi.load('auth2', function() {});
 		}
@@ -46,64 +46,64 @@
 			}
 			var elem = document.getElementById('signin');
 			elem.style.display = "none";
-            
-            // Query for user histor
+
+			// Query for user histor
 			$.get("http://192.17.90.133:8081", {
 				request_type: 'get_user_history',
 				user_name: user_name,
 			}, function(data) {
-                
-                console.log(data);
-                var user_history = $("#user_history");
-                for(var i=0; i<data.length; i++){
-                    var record = data[i];
-                    // get date
-                    var date = record['date'];
-                    // get total calorie
-                    var total_calorie = String(record['total_calorie']);
-                    if (total_calorie == "null"){
-                        total_calorie = "(no data)";
-                    }
-                    // get dishes_names
-                    var dish_names = record['dish_names'].split('|');
-                    // get dish images
-                    var dish_images = record['dish_images'].split('|');
-                    // get comments
-                    var comments = record['comments'].split('|');
-                    // get restaurant names
-                    var restaurant_names = record['restaurant_names'].split('|');
-                    // get individual calorie
-                    var calories = record['calories'].split('|');
-                    
-                    // the new entry about to be added
-                    var new_entry = 
-                            '<div class="card">\
-                            <div class="card-header"><a class="item-name">'+date+'</a></div>\
-                                <li class="list-group-item"><p class="top-header">You ate <a class="item-name">'+total_calorie+'</a> calories!</p></li>\
+
+				console.log(data);
+				var user_history = $("#user_history");
+				for (var i = 0; i < data.length; i++) {
+					var record = data[i];
+					// get date
+					var date = record['date'];
+					// get total calorie
+					var total_calorie = String(record['total_calorie']);
+					if (total_calorie == "null") {
+						total_calorie = "(no data)";
+					}
+					// get dishes_names
+					var dish_names = record['dish_names'].split('|');
+					// get dish images
+					var dish_images = record['dish_images'].split('|');
+					// get comments
+					var comments = record['comments'].split('|');
+					// get restaurant names
+					var restaurant_names = record['restaurant_names'].split('|');
+					// get individual calorie
+					var calories = record['calories'].split('|');
+
+					// the new entry about to be added
+					var new_entry =
+						'<div class="card">\
+                            <div class="card-header"><a class="item-name">' + date + '</a></div>\
+                                <li class="list-group-item"><p class="top-header">You ate <a class="item-name">' + total_calorie + '</a> calories!</p></li>\
                                 <ul class="d-flex flex-row">';
-                    for (var j=0; j<dish_names.length; j++){
-                        if (j%3 == 0 && j!=0){
-                            new_entry = new_entry + '</ul><ul class="d-flex flex-row">'
-                        }
-                        var list_entry = 
-                                    '<li class="list-group-item col-4">\
-                                            <img src="'+dish_images[j]+'" class="img-fluid rounded" alt="Sumerinlan" style="width: 100%">\
-                                            <p>'+dish_names[j]+' </p>\
-                                            <p><a class="item-name">Restaurant </a> '+restaurant_names[j]+' </p>\
+					for (var j = 0; j < dish_names.length; j++) {
+						if (j % 3 == 0 && j != 0) {
+							new_entry = new_entry + '</ul><ul class="d-flex flex-row">'
+						}
+						var list_entry =
+							'<li class="list-group-item col-4">\
+                                            <img src="' + dish_images[j] + '" class="img-fluid rounded" alt="Sumerinlan" style="width: 100%">\
+                                            <p>' + dish_names[j] + ' </p>\
+                                            <p><a class="item-name">Restaurant </a> ' + restaurant_names[j] + ' </p>\
                                             <div class="dropdown-divider"></div>\
-                                            <p><a class="item-name">Calorie </a>  '+calories[j]+'</p>\
+                                            <p><a class="item-name">Calorie </a>  ' + calories[j] + '</p>\
                                             <div class="dropdown-divider"></div>\
                                             <a class="item-name">Comments </a>\
-                                            <p>'+comments[j]+'</p>\
+                                            <p>' + comments[j] + '</p>\
                                     </li>';
-                        new_entry = new_entry + list_entry;
-                    }
-                    new_entry = new_entry + '</ul></div>';
-                    
-                    // Append the new card to user history
-                    user_history.append(new_entry);
-                }
-            });
+						new_entry = new_entry + list_entry;
+					}
+					new_entry = new_entry + '</ul></div>';
+
+					// Append the new card to user history
+					user_history.append(new_entry);
+				}
+			});
 		}
 
 		function getOut() {
@@ -121,35 +121,35 @@
 			elem.style.display = "block";
 		}
 	</script>
-    
+
 </head>
 
 
 <body>
-    <div class="containter">
-        <nav class="navbar navbar-expand-lg navbar-light bg-fade">
-      <div class="col-12 col-md-3">
-       <a class="navbar-brand" href="http://upversion.web.engr.illinois.edu/">Food Quest</a>
-      </div>
-            
-    <div class="col-12 col-md-3">
-       <ul class="navbar-nav d-flex flex-row-reverse">
-        <li class="nav-item" style="padding-right: 10px;">
-         <div class="g-signin2" data-onsuccess="onSignIn" id="signin" data-width="200" data-longtitle="true"></div>
-        </li>
-        <li class="nav-item dropdown usr_related" style="display:none;" style="padding-right: 10px;">
-         <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color:transparent;padding:0px;">
-          <img src="if_grapes_2003194.png" class="img-fluid rounded" style="width:40px;height:40px" id="usericon">
-           </button>
-         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-header" id="username">Sumerinlan</a >
-          <a class="dropdown-item" href="http://upversion.web.engr.illinois.edu/">Home</a >
-          <a class="dropdown-item" href="http://upversion.web.engr.illinois.edu/user_page.html">History</a >
-          <a class="dropdown-item" href="#" onclick="getOut();">Sign out</a >
-         </div>
-        </li>
-       </ul>
-      </div>
+	<div class="containter">
+		<nav class="navbar navbar-expand-lg navbar-light bg-fade">
+			<div class="col-12 col-md-9">
+				<a class="navbar-brand" href="http://upversion.web.engr.illinois.edu/">Food Quest</a>
+			</div>
+
+			<div class="col-12 col-md-3">
+				<ul class="navbar-nav d-flex flex-row-reverse">
+					<li class="nav-item" style="padding-right: 10px;">
+						<div class="g-signin2" data-onsuccess="onSignIn" id="signin" data-width="200" data-longtitle="true"></div>
+					</li>
+					<li class="nav-item dropdown usr_related" style="display:none;" style="padding-right: 10px;">
+						<button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color:transparent;padding:0px;">
+                            <img src="if_grapes_2003194.png" class="img-fluid rounded" style="width:40px;height:40px" id="usericon">
+                        </button>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							<a class="dropdown-header" id="username">Sumerinlan</a>
+                            <a class="dropdown-item" href="http://upversion.web.engr.illinois.edu/">Home</a>
+                            <a class="dropdown-item" href="http://upversion.web.engr.illinois.edu/user_page.html">History</a>
+                            <a class="dropdown-item" href="#" onclick="getOut();">Sign out</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </nav>
 
         <div class="container-fluid">
@@ -167,51 +167,53 @@
 <!--
                             <div class="card">
                                 <div class="card-header"><a class="item-name">2018.03.27</a></div>
-                                 <div class="card-body">
-                                    <p>You have eatten <a style="font-size: 26px; font-weight:2em;">1310</a> calorie</p>
-                                </div> 
-                                <li class="list-group-item"><p class="top-header">You ate <a class="item-name">1230</a> calories!</p></li>
-                                <ul class="d-flex flex-row">
-                                    <li class="list-group-item">
-                                            <img src="food_test.jpg" class="img-fluid rounded" alt="Sumerinlan" style="width: 100%">
-                                            <p><a class="item-name">Restaurant </a> Perkins Restaurant & Bakery</p>
-                                            <div class="dropdown-divider"></div>
-                                            <p><a class="item-name">Calorie </a>  1200</p>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="item-name">Comments </a>
-                                            <p>I like to take this dish because</p>
-                                    </li>
-                                    <li class="list-group-item">
-                                            <img src="food_test.jpg" class="img-fluid rounded" alt="Sumerinlan" style="width: 100%">
-                                            <p><a class="item-name">Restaurant </a> Perkins Restaurant & Bakery</p>
-                                            <div class="dropdown-divider"></div>
-                                            <p><a class="item-name">Calorie </a>  1200</p>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="item-name">Comments </a>
-                                            <p>I like to take this dish because</p>
-                                    </li>
-                                    <li class="list-group-item">
-                                            <img src="food_test.jpg" class="img-fluid rounded" alt="Sumerinlan" style="width: 100%">
-                                            <p><a class="item-name">Restaurant </a> Perkins Restaurant & Bakery</p>
-                                            <div class="dropdown-divider"></div>
-                                            <p><a class="item-name">Calorie </a>  1200</p>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="item-name">Comments </a>
-                                            <p>I like to take this dish because</p>
-                                    </li>
-                                </ul>
-                            </div>  
--->
-                        </div>
-                        
-                    </div>
+						<div class="card-body">
+							<p>You have eatten <a style="font-size: 26px; font-weight:2em;">1310</a> calorie</p>
+						</div>
+						<li class="list-group-item">
+							<p class="top-header">You ate <a class="item-name">1230</a> calories!</p>
+						</li>
+						<ul class="d-flex flex-row">
+							<li class="list-group-item">
+								<img src="food_test.jpg" class="img-fluid rounded" alt="Sumerinlan" style="width: 100%">
+								<p><a class="item-name">Restaurant </a> Perkins Restaurant & Bakery</p>
+								<div class="dropdown-divider"></div>
+								<p><a class="item-name">Calorie </a> 1200</p>
+								<div class="dropdown-divider"></div>
+								<a class="item-name">Comments </a>
+								<p>I like to take this dish because</p>
+							</li>
+							<li class="list-group-item">
+								<img src="food_test.jpg" class="img-fluid rounded" alt="Sumerinlan" style="width: 100%">
+								<p><a class="item-name">Restaurant </a> Perkins Restaurant & Bakery</p>
+								<div class="dropdown-divider"></div>
+								<p><a class="item-name">Calorie </a> 1200</p>
+								<div class="dropdown-divider"></div>
+								<a class="item-name">Comments </a>
+								<p>I like to take this dish because</p>
+							</li>
+							<li class="list-group-item">
+								<img src="food_test.jpg" class="img-fluid rounded" alt="Sumerinlan" style="width: 100%">
+								<p><a class="item-name">Restaurant </a> Perkins Restaurant & Bakery</p>
+								<div class="dropdown-divider"></div>
+								<p><a class="item-name">Calorie </a> 1200</p>
+								<div class="dropdown-divider"></div>
+								<a class="item-name">Comments </a>
+								<p>I like to take this dish because</p>
+							</li>
+						</ul>
+			</div>
+			-->
+	</div>
 
-                </div>
-            </div>                
-        </div>
+	</div>
+
+	</div>
+	</div>
+	</div>
 
 
-    </div>
+	</div>
 </body>
 
 </html>

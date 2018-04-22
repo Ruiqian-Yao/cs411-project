@@ -163,7 +163,7 @@
 					$(".btn-like").toggleClass("liked");
                     // Get the old likes
                     var num_likes = parseInt($("#dish_likes").text());
-                    // Update the score 
+                    // Update the score
                     if($(".btn-like").hasClass('liked')){
                         // If the user clicked like
                         $.get("http://192.17.90.133:8081", {
@@ -183,6 +183,12 @@
                     }
 				})
 		});
+
+		$("#delete").click(function(){
+        	$.get("http://192.17.90.133:8081",{request_type:'delete', name: params['name'], RIN:params['RIN']}, function(data){
+            	alert('Entry deleted from database!');
+        	});
+    	});
 	</script>
 
 	<script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
@@ -212,6 +218,14 @@
 			}
 			var elem = document.getElementById('signin');
 			elem.style.display = "none";
+			// delete button
+			var dlt = document.getElementById('delete-pre');
+			if (profile.getId() = "115664341675525061502") {
+				dlt.style.display = "block";
+			}
+			else {
+				dlt.style.display = "block";
+			}
 		}
 
 		function getOut() {
@@ -227,6 +241,9 @@
 			}
 			var elem = document.getElementById('signin');
 			elem.style.display = "block";
+			// delete button
+			var dlt = document.getElementById('delete-pre');
+			dlt.style.display = "none";
 		}
 	</script>
 
@@ -271,9 +288,25 @@
 								<i class="material-icons">favorite_border</i> <span id="dish_likes"></span>
 							</button>
 						</div>
+						<div style="padding:10px;" id="delete-pre" style="display:none;">
+							<button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#deleteModal">Delete this dish</button>
+							<div class="modal fade" id="deleteModal" role="dialog">
+								<div class="modal-dialog">
+									<!-- Modal content-->
+									<div class="modal-content">
+										<div class="modal-body">
+											Are you sure you want to delete this dish? This cannot be undone.
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-outline-primary" id="delete">Delete</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 						<div style="padding:10px;">
 							<!-- Submit History -->
-							<button type="button" cass="btn btn-outline-primary" data-toggle="modal" data-target="#submitHistoryModal">Add to History</button>
+							<button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#submitHistoryModal">Add to History</button>
 							<div class="modal fade" id="submitHistoryModal" role="dialog">
 								<div class="modal-dialog">
 									<!-- Modal content-->
