@@ -216,11 +216,7 @@
 	border: None;
 }
 
-/* .a:not([href]):not([tabindex]) {
-	color: None;
-} */
-
-.item-name {
+.text-primary {
 	color: #FF9F55 !important;
 	font-weight: 600;
 	font-size: 20px
@@ -233,6 +229,24 @@
 	
 }
 
+.card-header {
+	background-color: #FF9F55;
+}
+
+.card-header-text {
+	color: #ffffff;
+}
+
+.btn-outline-success {
+	color:#FF9F55;
+	border-color:#FF9F55;
+}
+
+.btn-outline-success:hover {
+    background-color: #FF9F55;
+    border-color: #FF9F55;
+}
+
 /*sticky*/
 .sticky {
 	position: -webkit-sticky;
@@ -240,5 +254,6 @@
 	top: 20px;
 	z-index: 1000;
 }
+
 
 
