@@ -92,7 +92,7 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
         if(params['request_type'][0] == 'search'):
             keyword = params['keyword'][0]
             keyword = '%' + keyword + '%'
-            cmd = 'SELECT d.name, d.img, d.score, r.name, r.RIN FROM Dish d, Restaurant r WHERE d.RIN = r.RIN AND (d.name LIKE %s OR r.name LIKE %s OR d.description LIKE %s OR d.ingredient LIKE %s OR d.category LIKE %s OR r.category LIKE %s) ORDER BY d.score desc LIMIT 50'
+            cmd = 'SELECT d.name, d.img, d.num_like, r.name, r.RIN FROM Dish d, Restaurant r WHERE d.RIN = r.RIN AND (d.name LIKE %s OR r.name LIKE %s OR d.description LIKE %s OR d.ingredient LIKE %s OR d.category LIKE %s OR r.category LIKE %s) ORDER BY d.score desc LIMIT 50'
             cur.execute(cmd,[keyword, keyword, keyword, keyword, keyword, keyword])
             data_from_db = cur.fetchall()
             self.wfile.write(bytes(json.dumps(data_from_db),"utf8"))
